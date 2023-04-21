@@ -247,11 +247,11 @@ function watermelon(x, y, s) {
   fill(217, 58, 58);
   square(x + 10 * s, y + 10 * s, s * 50);
   square(x + 85 * s, y - 40 * s, s * 50);
+  square(x + 110 * s, y + 10 * s, s * 50);
 
   push();
   fill(233, 71, 71);
   square(x + 60 * s, y + 10 * s, s * 50);
-  square(x + 110 * s, y + 10 * s, s * 50);
 
   square(x + 35 * s, y - 40 * s, s * 50);
   square(x + 60 * s, y - 90 * s, s * 50);
