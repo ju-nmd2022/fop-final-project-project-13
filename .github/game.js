@@ -233,9 +233,35 @@ function kirby(x, y, s) {
   pop();
 }
 
+function watermelon(x, y, s) {
+  push();
+  fill(124, 183, 141);
+  square(x + 10 * s, y + 60 * s, s * 50);
+  square(x + 110 * s, y + 60 * s, s * 50);
+
+  push();
+  fill(103, 158, 119);
+  square(x + 60 * s, y + 60 * s, s * 50);
+
+  push();
+  fill(197, 84, 84);
+  square(x + 10 * s, y + 10 * s, s * 50);
+  square(x + 85 * s, y - 40 * s, s * 50);
+
+  push();
+  fill(209, 95, 95);
+  square(x + 60 * s, y + 10 * s, s * 50);
+  square(x + 110 * s, y + 10 * s, s * 50);
+
+  square(x + 35 * s, y - 40 * s, s * 50);
+  square(x + 60 * s, y - 90 * s, s * 50);
+  pop();
+}
+
 function draw() {
   iceCream(x, y, s * 0.7);
   mushroom(x + 50, y, s * 0.7);
   duck(x + 100, y, s * 0.7);
-  kirby(x - 40, y + 100, s * 0.7);
+  kirby(x - 90, y + 100, s * 0.7);
+  watermelon(x + 230, y + 230, s * 0.7);
 }
