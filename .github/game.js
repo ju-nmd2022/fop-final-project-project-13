@@ -235,21 +235,21 @@ function kirby(x, y, s) {
 
 function watermelon(x, y, s) {
   push();
-  fill(124, 183, 141);
+  fill(95, 202, 125);
   square(x + 10 * s, y + 60 * s, s * 50);
   square(x + 110 * s, y + 60 * s, s * 50);
 
   push();
-  fill(103, 158, 119);
+  fill(40, 167, 75);
   square(x + 60 * s, y + 60 * s, s * 50);
 
   push();
-  fill(197, 84, 84);
+  fill(217, 58, 58);
   square(x + 10 * s, y + 10 * s, s * 50);
   square(x + 85 * s, y - 40 * s, s * 50);
 
   push();
-  fill(209, 95, 95);
+  fill(233, 71, 71);
   square(x + 60 * s, y + 10 * s, s * 50);
   square(x + 110 * s, y + 10 * s, s * 50);
 
