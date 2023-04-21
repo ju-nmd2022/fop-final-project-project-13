@@ -49,7 +49,23 @@ function mushroom(x, y, s) {
   pop();
 }
 
+function duck(x, y, s) {
+  push();
+  noStroke();
+  fill(255, 240, 130);
+  square(x + 300 * s, y + 30 * s, s * 50);
+  square(x + 350 * s, y + 30 * s, s * 50);
+  square(x + 350 * s, y - 20 * s, s * 50);
+  pop();
+  push();
+  noStroke();
+  fill(240, 140, 80);
+  square(x + 400 * s, y - 20 * s, s * 50);
+  pop();
+}
+
 function draw() {
   iceCream(x, y, s * 0.7);
   mushroom(x + 50, y, s * 0.7);
+  duck(x + 100, y, s * 0.7);
 }
