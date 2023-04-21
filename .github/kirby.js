@@ -10,7 +10,7 @@ function setup() {
 function kirby() {
   noStroke();
   push();
-  fill(0, 0, 0);
+  fill(100, 100, 100);
   //legs
   square(x + 110 * s, y + 300 * s, s * 20);
   square(x + 130 * s, y + 300 * s, s * 20);
