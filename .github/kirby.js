@@ -176,6 +176,24 @@ function kirby() {
   pop();
 }
 
+function sushi() {
+  noStroke();
+  push();
+  fill(70, 70, 70);
+  square(x + 10 * s, y + 60 * s, s * 50);
+  square(x + 60 * s, y + 60 * s, s * 50);
+  push();
+  fill(177, 243, 161);
+  square(x + 60 * s, y + 10 * s, s * 50);
+  push();
+  fill(252, 196, 196);
+  square(x + 35 * s, y + 10 * s, s * 50);
+  push();
+  fill(225, 225, 225);
+  square(x + 10 * s, y + 10 * s, s * 50);
+}
+
 function draw() {
   kirby(x, y, s * 0.7);
+  sushi(x, y, s * 0.7);
 }

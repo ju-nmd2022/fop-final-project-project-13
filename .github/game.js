@@ -283,6 +283,23 @@ function cloud(x, y, s) {
   square(x + 110 * s, y - 70 + 60 * s, s * 50);
 }
 
+function sushi(x, y, s) {
+  noStroke();
+  push();
+  fill(70, 70, 70);
+  square(x + 10 * s, y + 60 * s, s * 50);
+  square(x + 60 * s, y + 60 * s, s * 50);
+  push();
+  fill(177, 243, 161);
+  square(x + 60 * s, y + 10 * s, s * 50);
+  push();
+  fill(252, 196, 196);
+  square(x + 35 * s, y + 10 * s, s * 50);
+  push();
+  fill(225, 225, 225);
+  square(x + 10 * s, y + 10 * s, s * 50);
+}
+
 function draw() {
   iceCream(x, y, s * 0.7);
   mushroom(x + 50, y, s * 0.7);
@@ -290,4 +307,5 @@ function draw() {
   kirby(x - 90, y + 100, s * 0.7);
   watermelon(x + 230, y + 230, s * 0.7);
   cloud(x + 370, y + 230, s * 0.7);
+  sushi(x + 370, y + 100, s * 0.7);
 }
