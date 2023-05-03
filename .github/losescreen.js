@@ -8,23 +8,23 @@ function preload() {
 
 function setup() {
   createCanvas(900, 600);
-  background(213, 212, 238);
+  background(241, 210, 195);
 }
 
 function startScreen() {
   push();
-  stroke(195, 177, 225);
+  stroke(245, 171, 135);
   strokeWeight(2);
   rect(x + 150 * s, y + 10 * s, 400, 300);
 
   push();
-  stroke(195, 177, 225);
+  stroke(245, 171, 135);
   strokeWeight(2);
   noFill();
   rect(x + 10 * s, y - 40 * s, 400, 300);
 
   push();
-  fill(195, 177, 225);
+  fill(245, 171, 135);
   ellipse(750, 430, 50, 50);
   ellipse(780, 320, 30, 30);
   ellipse(720, 270, 20, 20);
