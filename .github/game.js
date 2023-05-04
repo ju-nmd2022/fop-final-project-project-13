@@ -7,6 +7,9 @@ function setup() {
   background(253, 212, 238);
 }
 
+window.setup = setup;
+window.draw = draw;
+
 function iceCream(x, y, s) {
   push();
   noStroke();

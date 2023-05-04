@@ -362,7 +362,7 @@ function kirby(x, y, s) {
   pop();
 }
 
-function keyIsDown() {
+function keyPressed() {
   if (keyCode === 37) {
     x -= 5;
   } else if (keyCode === 39) {
