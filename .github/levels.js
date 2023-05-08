@@ -1,6 +1,8 @@
 let x = 100;
 let y = 100;
 let s = 1;
+let moveLeft = false;
+let moveRight = false;
 
 function setup() {
   createCanvas(900, 600);
@@ -379,14 +381,29 @@ function duck(x, y, s) {
 
 function keyPressed() {
   if (keyCode === 37) {
-    x -= 5;
+    moveLeft = true;
   } else if (keyCode === 39) {
-    x += 5;
+    moveRight = true;
+  }
+}
+
+function keyReleased() {
+  if (keyCode === 37) {
+    moveLeft = false;
+  } else if (keyCode === 39) {
+    moveRight = false;
   }
 }
 
 function draw() {
   level1();
+
+  if (moveLeft) {
+    x -= 5;
+  } else if (moveRight) {
+    x += 5;
+  }
+
   kirby(x + 540, y + 295, s * 0.3);
   duck(x - 300, y + 150, s * 0.9);
   //   level3();
