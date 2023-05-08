@@ -1,9 +1,10 @@
 let x = 100;
 let y = 100;
 let s = 1;
+let img;
 
 function preload() {
-  emoji = loadImage("github/startphoto.png");
+  img = loadImage(".github/losescreen.png");
 }
 
 function setup() {
@@ -12,24 +13,7 @@ function setup() {
 }
 
 function startScreen() {
-  push();
-  stroke(245, 171, 135);
-  strokeWeight(2);
-  rect(x + 150 * s, y + 10 * s, 400, 300);
-
-  push();
-  stroke(245, 171, 135);
-  strokeWeight(2);
-  noFill();
-  rect(x + 10 * s, y - 40 * s, 400, 300);
-
-  push();
-  fill(245, 171, 135);
-  ellipse(750, 430, 50, 50);
-  ellipse(780, 320, 30, 30);
-  ellipse(720, 270, 20, 20);
-
-  pop();
+  image(img, 0, 0);
 }
 
 function draw() {

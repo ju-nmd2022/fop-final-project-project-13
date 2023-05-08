@@ -1,9 +1,10 @@
 let x = 100;
 let y = 100;
 let s = 1;
+let img;
 
 function preload() {
-  emoji = loadImage("github/startphoto.png");
+  img = loadImage(".github/welcomescreen.png");
 }
 
 function setup() {
@@ -12,26 +13,7 @@ function setup() {
 }
 
 function startScreen() {
-  push();
-  stroke(195, 177, 225);
-  strokeWeight(2);
-  rect(x + 150 * s, y + 10 * s, 400, 300);
-
-  push();
-  stroke(195, 177, 225);
-  strokeWeight(2);
-
-  rect(x + 10 * s, y - 40 * s, 300, 200);
-  rect(x + 10 * s, y - 40 * s, 300, 20);
-  rect(x + 10 * s, y + 140 * s, 300, 20);
-
-  push();
-  fill(195, 177, 225);
-  ellipse(750, 430, 50, 50);
-  ellipse(780, 320, 30, 30);
-  ellipse(720, 270, 20, 20);
-
-  pop();
+  image(img, 0, 0);
 }
 
 function draw() {
