@@ -362,6 +362,21 @@ function kirby(x, y, s) {
   pop();
 }
 
+function duck(x, y, s) {
+  push();
+  noStroke();
+  fill(255, 240, 130);
+  square(x + 300 * s, y + 30 * s, s * 50);
+  square(x + 350 * s, y + 30 * s, s * 50);
+  square(x + 350 * s, y - 20 * s, s * 50);
+  pop();
+  push();
+  noStroke();
+  fill(240, 140, 80);
+  square(x + 400 * s, y - 20 * s, s * 50);
+  pop();
+}
+
 function keyPressed() {
   if (keyCode === 37) {
     x -= 5;
@@ -373,6 +388,7 @@ function keyPressed() {
 function draw() {
   level1();
   kirby(x + 540, y + 295, s * 0.3);
+  duck(x - 300, y + 150, s * 0.9);
   //   level3();
   //level5();
   //level2();
