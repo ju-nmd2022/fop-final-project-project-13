@@ -20,8 +20,10 @@ function startScreen() {
   push();
   stroke(195, 177, 225);
   strokeWeight(2);
-  noFill();
-  rect(x + 10 * s, y - 40 * s, 400, 300);
+
+  rect(x + 10 * s, y - 40 * s, 300, 200);
+  rect(x + 10 * s, y - 40 * s, 300, 20);
+  rect(x + 10 * s, y + 140 * s, 300, 20);
 
   push();
   fill(195, 177, 225);
