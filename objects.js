@@ -1,5 +1,13 @@
 //example of the duck puzzle, written as an object
 
+let x = 100;
+let y = 100;
+let s = 1;
+
+function setup() {
+  createCanvas(700, 600);
+}
+
 function Duck(x, y, s) {
   this.x = x;
   this.y = y;
@@ -22,12 +30,8 @@ function Duck(x, y, s) {
   };
 }
 
-function setup() {
-  createCanvas(800, 600);
-}
-
 function draw() {
-  background(220);
+  background(253, 212, 238);
 
   var duck = new Duck(100, 100, 1);
   duck.display();
