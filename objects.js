@@ -33,6 +33,6 @@ function Duck(x, y, s) {
 function draw() {
   background(253, 212, 238);
 
-  var duck = new Duck(100, 100, 1);
+  var duck = new Duck(-50, 200, 1);
   duck.display();
 }
