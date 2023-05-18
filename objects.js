@@ -15,7 +15,7 @@ function Duck(x, y, s) {
   this.y = y - 50;
   this.s = s;
 
-  this.drawSquare1 = function () {
+  this.drawDuck1 = function () {
     push();
     noStroke();
     fill(255, 240, 130);
@@ -23,7 +23,7 @@ function Duck(x, y, s) {
     pop();
   };
 
-  this.drawSquare2 = function () {
+  this.drawDuck2 = function () {
     push();
     noStroke();
     fill(255, 240, 130);
@@ -31,7 +31,7 @@ function Duck(x, y, s) {
     pop();
   };
 
-  this.drawSquare3 = function () {
+  this.drawDuck3 = function () {
     push();
     noStroke();
     fill(255, 240, 130);
@@ -39,7 +39,7 @@ function Duck(x, y, s) {
     pop();
   };
 
-  this.drawSquare4 = function () {
+  this.drawDuck4 = function () {
     push();
     noStroke();
     fill(240, 140, 80);
@@ -48,10 +48,10 @@ function Duck(x, y, s) {
   };
 
   this.display = function () {
-    this.drawSquare1();
-    this.drawSquare2();
-    this.drawSquare3();
-    this.drawSquare4();
+    this.drawDuck1();
+    this.drawDuck2();
+    this.drawDuck3();
+    this.drawDuck4();
   };
 }
 
@@ -61,7 +61,7 @@ function IceCream(x, y, s) {
   this.y = y + 200;
   this.s = s;
 
-  this.drawSquare1 = function () {
+  this.drawIceCream1 = function () {
     push();
     noStroke();
     fill(240, 192, 168);
@@ -69,7 +69,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare2 = function () {
+  this.drawIceCream2 = function () {
     push();
     noStroke();
     fill(240, 192, 168);
@@ -77,7 +77,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare3 = function () {
+  this.drawIceCream3 = function () {
     push();
     noStroke();
     fill(240, 192, 168);
@@ -85,7 +85,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare4 = function () {
+  this.drawIceCream4 = function () {
     push();
     noStroke();
     fill(240, 142, 198);
@@ -93,7 +93,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare5 = function () {
+  this.drawIceCream5 = function () {
     push();
     noStroke();
     fill(240, 142, 198);
@@ -101,7 +101,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare6 = function () {
+  this.drawIceCream6 = function () {
     push();
     noStroke();
     fill(240, 142, 198);
@@ -109,7 +109,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare7 = function () {
+  this.drawIceCream7 = function () {
     push();
     noStroke();
     fill(240, 142, 198);
@@ -117,7 +117,7 @@ function IceCream(x, y, s) {
     pop();
   };
 
-  this.drawSquare8 = function () {
+  this.drawIceCream8 = function () {
     push();
     noStroke();
     fill(240, 142, 198);
@@ -126,14 +126,14 @@ function IceCream(x, y, s) {
   };
 
   this.display = function () {
-    this.drawSquare1();
-    this.drawSquare2();
-    this.drawSquare3();
-    this.drawSquare4();
-    this.drawSquare5();
-    this.drawSquare6();
-    this.drawSquare7();
-    this.drawSquare8();
+    this.drawIceCream1();
+    this.drawIceCream2();
+    this.drawIceCream3();
+    this.drawIceCream4();
+    this.drawIceCream5();
+    this.drawIceCream6();
+    this.drawIceCream7();
+    this.drawIceCream8();
   };
 }
 
@@ -143,7 +143,7 @@ function Mushroom(x, y, s) {
   this.y = y;
   this.s = s;
 
-  this.drawSquare1 = function () {
+  this.drawMushroom1 = function () {
     push();
     noStroke();
     fill(240, 192, 168);
@@ -151,7 +151,7 @@ function Mushroom(x, y, s) {
     pop();
   };
 
-  this.drawSquare2 = function () {
+  this.drawMushroom2 = function () {
     push();
     noStroke();
     fill(255, 30, 30);
@@ -159,7 +159,7 @@ function Mushroom(x, y, s) {
     pop();
   };
 
-  this.drawSquare3 = function () {
+  this.drawMushroom3 = function () {
     push();
     noStroke();
     fill(255, 30, 30);
@@ -167,7 +167,7 @@ function Mushroom(x, y, s) {
     pop();
   };
 
-  this.drawSquare4 = function () {
+  this.drawMushroom4 = function () {
     push();
     noStroke();
     fill(255, 30, 30);
@@ -175,7 +175,7 @@ function Mushroom(x, y, s) {
     pop();
   };
 
-  this.drawSquare5 = function () {
+  this.drawMushroom5 = function () {
     push();
     noStroke();
     fill(255, 255, 255);
@@ -183,7 +183,7 @@ function Mushroom(x, y, s) {
     pop();
   };
 
-  this.drawSquare6 = function () {
+  this.drawMushroom6 = function () {
     push();
     noStroke();
     fill(255, 255, 255);
@@ -192,12 +192,12 @@ function Mushroom(x, y, s) {
   };
 
   this.display = function () {
-    this.drawSquare1();
-    this.drawSquare2();
-    this.drawSquare3();
-    this.drawSquare4();
-    this.drawSquare5();
-    this.drawSquare6();
+    this.drawMushroom1();
+    this.drawMushroom2();
+    this.drawMushroom3();
+    this.drawMushroom4();
+    this.drawMushroom5();
+    this.drawMushroom6();
   };
 }
 
@@ -207,7 +207,7 @@ function Watermelon(x, y, s) {
   this.y = y + 260;
   this.s = s;
 
-  this.drawSquare1 = function () {
+  this.drawWatermelon1 = function () {
     push();
     fill(95, 202, 125);
     noStroke();
@@ -215,7 +215,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare2 = function () {
+  this.drawWatermelon2 = function () {
     push();
     fill(95, 202, 125);
     noStroke();
@@ -223,7 +223,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare3 = function () {
+  this.drawWatermelon3 = function () {
     push();
     fill(40, 167, 75);
     noStroke();
@@ -231,7 +231,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare4 = function () {
+  this.drawWatermelon4 = function () {
     push();
     fill(217, 58, 58);
     noStroke();
@@ -239,7 +239,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare5 = function () {
+  this.drawWatermelon5 = function () {
     push();
     fill(217, 58, 58);
     noStroke();
@@ -247,7 +247,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare6 = function () {
+  this.drawWatermelon6 = function () {
     push();
     fill(217, 58, 58);
     noStroke();
@@ -255,7 +255,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare7 = function () {
+  this.drawWatermelon7 = function () {
     push();
     fill(233, 71, 71);
     noStroke();
@@ -263,7 +263,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare8 = function () {
+  this.drawWatermelon8 = function () {
     push();
     fill(233, 71, 71);
     noStroke();
@@ -271,7 +271,7 @@ function Watermelon(x, y, s) {
     pop();
   };
 
-  this.drawSquare9 = function () {
+  this.drawWatermelon9 = function () {
     push();
     fill(233, 71, 71);
     noStroke();
@@ -280,15 +280,15 @@ function Watermelon(x, y, s) {
   };
 
   this.display = function () {
-    this.drawSquare1();
-    this.drawSquare2();
-    this.drawSquare3();
-    this.drawSquare4();
-    this.drawSquare5();
-    this.drawSquare6();
-    this.drawSquare7();
-    this.drawSquare8();
-    this.drawSquare9();
+    this.drawWatermelon1();
+    this.drawWatermelon2();
+    this.drawWatermelon3();
+    this.drawWatermelon4();
+    this.drawWatermelon5();
+    this.drawWatermelon6();
+    this.drawWatermelon7();
+    this.drawWatermelon8();
+    this.drawWatermelon9();
   };
 }
 
@@ -298,49 +298,49 @@ function Cloud(x, y, s) {
   this.y = y;
   this.s = s;
 
-  this.drawSquare1 = function () {
+  this.drawCloud1 = function () {
     push();
     fill(213, 231, 231);
     square(this.x + 10 * this.s, this.y + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare2 = function () {
+  this.drawCloud2 = function () {
     push();
     fill(223, 242, 242);
     square(this.x + 60 * this.s, this.y + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare3 = function () {
+  this.drawCloud3 = function () {
     push();
     fill(181, 209, 209);
     square(this.x + 110 * this.s, this.y + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare4 = function () {
+  this.drawCloud4 = function () {
     push();
     fill(181, 209, 209);
     square(this.x + 60 * this.s, this.y - 50 + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare5 = function () {
+  this.drawCloud5 = function () {
     push();
     fill(213, 231, 231);
     square(this.x + 110 * this.s, this.y - 50 + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare6 = function () {
+  this.drawCloud6 = function () {
     push();
     fill(223, 242, 242);
     square(this.x + 160 * this.s, this.y - 50 + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare7 = function () {
+  this.drawCloud7 = function () {
     push();
     fill(181, 209, 209);
     square(this.x + 110 * this.s, this.y - 100 + 60 * this.s, this.s * 50);
@@ -349,13 +349,13 @@ function Cloud(x, y, s) {
 
   this.display = function () {
     noStroke();
-    this.drawSquare1();
-    this.drawSquare2();
-    this.drawSquare3();
-    this.drawSquare4();
-    this.drawSquare5();
-    this.drawSquare6();
-    this.drawSquare7();
+    this.drawCloud1();
+    this.drawCloud2();
+    this.drawCloud3();
+    this.drawCloud4();
+    this.drawCloud5();
+    this.drawCloud6();
+    this.drawCloud7();
   };
 }
 
@@ -365,35 +365,35 @@ function Sushi(x, y, s) {
   this.y = y;
   this.s = s;
 
-  this.drawSquare1 = function () {
+  this.drawSushi1 = function () {
     push();
     fill(70, 70, 70);
     square(this.x + 10 * this.s, this.y + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare2 = function () {
+  this.drawSushi2 = function () {
     push();
     fill(70, 70, 70);
     square(this.x + 60 * this.s, this.y + 60 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare3 = function () {
+  this.drawSushi3 = function () {
     push();
     fill(177, 243, 161);
     square(this.x + 60 * this.s, this.y + 10 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare4 = function () {
+  this.drawSushi4 = function () {
     push();
     fill(252, 196, 196);
     square(this.x + 35 * this.s, this.y + 10 * this.s, this.s * 50);
     pop();
   };
 
-  this.drawSquare5 = function () {
+  this.drawSushi5 = function () {
     push();
     fill(225, 225, 225);
     square(this.x + 10 * this.s, this.y + 10 * this.s, this.s * 50);
@@ -402,11 +402,11 @@ function Sushi(x, y, s) {
 
   this.display = function () {
     noStroke();
-    this.drawSquare1();
-    this.drawSquare2();
-    this.drawSquare3();
-    this.drawSquare4();
-    this.drawSquare5();
+    this.drawSushi1();
+    this.drawSushi2();
+    this.drawSushi3();
+    this.drawSushi4();
+    this.drawSushi5();
   };
 }
 
@@ -414,11 +414,11 @@ function draw() {
   var myWatermelon = new Watermelon(100, 100, 1);
   var myMushroom = new Mushroom(100, 100, 1);
   var myIceCream = new IceCream(100, 100, 1);
-  var duck = new Duck(-200, 170, 1);
+  var myDuck = new Duck(-200, 170, 1);
   var myCloud = new Cloud(100, 100, 1);
   var mySushi = new Sushi(530, 300, 1);
 
-  duck.display();
+  myDuck.display();
   myIceCream.display();
   myMushroom.display();
   myWatermelon.display();
