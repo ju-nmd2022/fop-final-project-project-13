@@ -8,8 +8,7 @@ function setup() {
   createCanvas(900, 600);
 }
 
-//duck
-
+//duck-----------------------------------------------------
 function Duck(x, y, s) {
   this.x = x;
   this.y = y - 50;
@@ -55,8 +54,7 @@ function Duck(x, y, s) {
   };
 }
 
-//ice cream
-
+//ice cream-----------------------------------------------------
 function IceCream(x, y, s) {
   this.x = x;
   this.y = y + 200;
@@ -138,8 +136,7 @@ function IceCream(x, y, s) {
   };
 }
 
-//mushroom
-
+//mushroom-----------------------------------------------------
 function Mushroom(x, y, s) {
   this.x = x + 70;
   this.y = y;
@@ -203,8 +200,7 @@ function Mushroom(x, y, s) {
   };
 }
 
-//watermelon
-
+//watermelon-----------------------------------------------------
 function Watermelon(x, y, s) {
   this.x = x + 200;
   this.y = y + 260;
