@@ -6,6 +6,7 @@ let s = 1;
 
 function setup() {
   createCanvas(900, 600);
+  background(253, 212, 238);
 }
 
 //duck-----------------------------------------------------
@@ -410,8 +411,6 @@ function Sushi(x, y, s) {
 }
 
 function draw() {
-  background(253, 212, 238);
-
   var myWatermelon = new Watermelon(100, 100, 1);
   var myMushroom = new Mushroom(100, 100, 1);
   var myIceCream = new IceCream(100, 100, 1);
