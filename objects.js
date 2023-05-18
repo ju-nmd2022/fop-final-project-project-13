@@ -291,6 +291,124 @@ function Watermelon(x, y, s) {
   };
 }
 
+//cloud----------------------------------------------------
+function Cloud(x, y, s) {
+  this.x = x + 400;
+  this.y = y;
+  this.s = s;
+
+  this.drawSquare1 = function () {
+    push();
+    fill(213, 231, 231);
+    square(this.x + 10 * this.s, this.y + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare2 = function () {
+    push();
+    fill(223, 242, 242);
+    square(this.x + 60 * this.s, this.y + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare3 = function () {
+    push();
+    fill(181, 209, 209);
+    square(this.x + 110 * this.s, this.y + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare4 = function () {
+    push();
+    fill(181, 209, 209);
+    square(this.x + 60 * this.s, this.y - 50 + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare5 = function () {
+    push();
+    fill(213, 231, 231);
+    square(this.x + 110 * this.s, this.y - 50 + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare6 = function () {
+    push();
+    fill(223, 242, 242);
+    square(this.x + 160 * this.s, this.y - 50 + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare7 = function () {
+    push();
+    fill(181, 209, 209);
+    square(this.x + 110 * this.s, this.y - 100 + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.display = function () {
+    noStroke();
+    this.drawSquare1();
+    this.drawSquare2();
+    this.drawSquare3();
+    this.drawSquare4();
+    this.drawSquare5();
+    this.drawSquare6();
+    this.drawSquare7();
+  };
+}
+
+//sushi-----------------------------------------------------
+function Sushi(x, y, s) {
+  this.x = x;
+  this.y = y;
+  this.s = s;
+
+  this.drawSquare1 = function () {
+    push();
+    fill(70, 70, 70);
+    square(this.x + 10 * this.s, this.y + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare2 = function () {
+    push();
+    fill(70, 70, 70);
+    square(this.x + 60 * this.s, this.y + 60 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare3 = function () {
+    push();
+    fill(177, 243, 161);
+    square(this.x + 60 * this.s, this.y + 10 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare4 = function () {
+    push();
+    fill(252, 196, 196);
+    square(this.x + 35 * this.s, this.y + 10 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.drawSquare5 = function () {
+    push();
+    fill(225, 225, 225);
+    square(this.x + 10 * this.s, this.y + 10 * this.s, this.s * 50);
+    pop();
+  };
+
+  this.display = function () {
+    noStroke();
+    this.drawSquare1();
+    this.drawSquare2();
+    this.drawSquare3();
+    this.drawSquare4();
+    this.drawSquare5();
+  };
+}
+
 function draw() {
   background(253, 212, 238);
 
@@ -298,9 +416,13 @@ function draw() {
   var myMushroom = new Mushroom(100, 100, 1);
   var myIceCream = new IceCream(100, 100, 1);
   var duck = new Duck(-200, 170, 1);
+  var myCloud = new Cloud(100, 100, 1);
+  var mySushi = new Sushi(530, 300, 1);
 
   duck.display();
   myIceCream.display();
   myMushroom.display();
   myWatermelon.display();
+  myCloud.display();
+  mySushi.display();
 }
