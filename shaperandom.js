@@ -6,7 +6,7 @@ let gravityMax = 2.0; // Maximum gravity value
 let spacing = 100; // Horizontal spacing between shapes
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(900, 600);
   for (let i = 0; i < 10; i++) {
     let x = random(width);
     let y = random(-height, 0);
