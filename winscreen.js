@@ -4,7 +4,7 @@ let s = 1;
 let img;
 
 function preload() {
-  img = loadImage(".github/winscreen.png");
+  img = loadImage("winscreen.png");
 }
 
 function setup() {
@@ -13,7 +13,8 @@ function setup() {
 }
 
 function winScreen() {
-  image(img, 0, 0);
+  scale(0.4);
+  image(img, 200, 200);
 }
 
 function draw() {

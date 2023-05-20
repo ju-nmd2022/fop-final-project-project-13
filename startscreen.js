@@ -4,7 +4,7 @@ let s = 1;
 let img;
 
 function preload() {
-  img = loadImage(".github/startscreen.js");
+  img = loadImage("welcomescreen.png");
 }
 
 function setup() {
@@ -14,5 +14,6 @@ function setup() {
 
 function draw() {
   background(213, 212, 238);
-  image(img, x, y, s * 0.7);
+  scale(0.4);
+  image(img, 200, 200);
 }
