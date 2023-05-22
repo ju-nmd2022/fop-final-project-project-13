@@ -9,7 +9,7 @@ let s = 2;
 function setup() {
   createCanvas(600, 700);
   kirbyX = width / 2;
-  characterY = height - 50;
+  kirbyY = height - 50;
   squareX = random(width);
   squareY = 0;
   circleX = random(width);
@@ -32,7 +32,7 @@ function draw() {
   circleY += 3;
 
   fill(255, 192, 203);
-  circle(kirbyX, characterY, 30);
+  circle(kirbyX, kirbyY, 30);
 
   // Draw the green square
   fill(0, 255, 0);
@@ -43,14 +43,14 @@ function draw() {
   circle(circleX, circleY, 30);
 
   // Check if the character collects the square
-  if (dist(kirbyX, characterY, squareX, squareY) < 15) {
+  if (dist(kirbyX, kirbyY, squareX, squareY) < 15) {
     score += 1;
     squareX = random(width);
     squareY = 0;
   }
 
   // Check if the character collects the circle
-  if (dist(kirbyX, characterY, circleX, circleY) < 15) {
+  if (dist(kirbyX, kirbyY, circleX, circleY) < 15) {
     score -= 1;
     circleX = random(width);
     circleY = 0;
