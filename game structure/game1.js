@@ -10,6 +10,7 @@ var character = {
 };
 var obstacles = [];
 var score = 0;
+var highScore = localStorage.getItem("highScore") || 0; // Retrieve the high score from localStorage or use 0 if not available
 var gameOver = false;
 var obstacleSpeed = 1; // Adjust the initial speed of falling squares
 var obstacleInterval = 800; // Adjust the interval between the creation of new squares
@@ -47,13 +48,43 @@ function handleKeyUp(event) {
 
 // Function to create obstacles
 function createObstacle(color) {
+  var obstacleWidth = 40;
+  var obstacleHeight = 40;
+  var obstacleGap = 20; // Gap between orange and purple obstacles
+
   var obstacle = {
-    x: Math.random() * (canvas.width - 40) + 20,
+    x: Math.random() * (canvas.width - obstacleWidth) + obstacleWidth / 2,
     y: 0,
-    width: 20,
-    height: 20,
-    color: color,
+    width: obstacleWidth,
+    height: obstacleHeight,
+    color: color === "green" ? "orange" : "purple",
   };
+
+  // Adjust the position of the obstacle to avoid overlap with existing obstacles
+  var overlapping = true;
+  while (overlapping) {
+    obstacle.x =
+      Math.random() * (canvas.width - obstacleWidth) + obstacleWidth / 2;
+    obstacle.y = Math.random() * -canvas.height; // Set a random negative y position for falling obstacles
+    overlapping = false;
+
+    // Check for overlap with existing obstacles
+    for (var i = 0; i < obstacles.length; i++) {
+      var existingObstacle = obstacles[i];
+      if (
+        obstacle.x + obstacle.width + obstacleGap > existingObstacle.x &&
+        obstacle.x - obstacleGap <
+          existingObstacle.x + existingObstacle.width &&
+        obstacle.y + obstacle.height + obstacleGap > existingObstacle.y &&
+        obstacle.y - obstacleGap < existingObstacle.y + existingObstacle.height
+      ) {
+        // There is an overlap, so set overlapping flag to true
+        overlapping = true;
+        break;
+      }
+    }
+  }
+
   obstacles.push(obstacle);
 }
 
@@ -71,7 +102,7 @@ function update() {
     }
 
     // Draw the character
-    context.fillStyle = "blue";
+    context.fillStyle = "orange";
     context.fillRect(
       character.x,
       character.y,
@@ -95,9 +126,9 @@ function update() {
         obstacle.x + obstacle.width >= character.x &&
         obstacle.x <= character.x + character.width
       ) {
-        if (obstacle.color === "green") {
+        if (obstacle.color === "orange") {
           score++;
-        } else if (obstacle.color === "red") {
+        } else if (obstacle.color === "purple") {
           gameOver = true;
         }
         obstacles.splice(i, 1);
@@ -107,7 +138,7 @@ function update() {
       // Remove obstacles that have gone off the screen or reached the bottom
       if (
         obstacle.y > canvas.height ||
-        (obstacle.color === "green" &&
+        (obstacle.color === "orange" &&
           obstacle.y + obstacle.height >= canvas.height)
       ) {
         obstacles.splice(i, 1);
@@ -115,10 +146,16 @@ function update() {
       }
     }
 
-    // Display the score
+    // Update the high score if the current score surpasses it
+    if (score > highScore) {
+      highScore = score;
+    }
+
+    // Display the score and high score
     context.fillStyle = "black";
     context.font = "20px Arial";
     context.fillText("Score: " + score, 10, 20);
+    context.fillText("High Score: " + highScore, 10, 40);
   } else {
     // Display game over message
     context.fillStyle = "red";
@@ -133,8 +170,20 @@ function update() {
 // Function to create obstacles at regular intervals
 function createObstaclesInterval() {
   setInterval(function () {
-    var color = Math.random() < 0.5 ? "red" : "green";
+    var color;
+    if (Math.random() < 0.6) {
+      color = "red"; // 60% chance of red square
+    } else {
+      color = "green"; // 40% chance of green square
+    }
     createObstacle(color);
+
+    // Create an additional obstacle with a higher chance for purple
+    if (Math.random() < 0.8) {
+      createObstacle("red"); // 80% chance of red square
+    } else {
+      createObstacle("green"); // 20% chance of green square
+    }
   }, 1000);
 }
 
