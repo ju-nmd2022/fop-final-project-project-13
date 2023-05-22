@@ -5,12 +5,14 @@ let s = 1;
 let moveLeft = false;
 let moveRight = false;
 let score = 0;
+let kirbyX = 100;
+let kirbyY = 100;
 
 const particleSize = 70; // Set the size of the particles
 
 function createParticle() {
   const x = Math.random() * width;
-  const y = -particleSize; // Set initial y position to a negative value
+  const y = -70; // Set initial y position to a negative value
   const v = 0.5 + Math.random() * 3.5; // Adjust the velocity range
   const shape = Math.random() < 0.5 ? "square" : "circle";
   const color = shape === "square" ? "green" : "red";
@@ -25,10 +27,10 @@ function drawParticle(particle) {
   if (particle.shape === "square") {
     fill(190, 255, 180);
     rectMode(CENTER);
-    rect(0, 0, particleSize, particleSize);
+    rect(0, 0, 70, 70);
   } else if (particle.shape === "circle") {
     fill(240, 100, 120);
-    ellipse(0, 0, particleSize, particleSize);
+    ellipse(0, 0, 70, 70);
   }
 
   pop();
@@ -38,14 +40,14 @@ function updateParticle(particle) {
   particle.y = particle.y + particle.velocity;
 
   // Wrap the particle when it reaches the bottom of the canvas
-  if (particle.y > height + particleSize) {
-    particle.y = -particleSize;
+  if (particle.y > height + 70) {
+    particle.y = -70;
   }
 
   if (checkCollision(particle)) {
     // Particle collided with Kirby
     score++;
-    particle.y = -particleSize; // Reset the particle's position
+    particle.y = -70; // Reset the particle's position
   }
 }
 
@@ -58,171 +60,172 @@ function setup() {
     particles.push(particle);
   }
 }
-function kirby(x, y, s) {
+
+function kirby() {
   noStroke();
   push();
   fill(100, 100, 100);
   //legs
-  square(x + 110 * s, y + 300 * s, s * 20);
-  square(x + 130 * s, y + 300 * s, s * 20);
-  square(x + 150 * s, y + 300 * s, s * 20);
-  square(x + 170 * s, y + 300 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 300 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 300 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 300 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 300 * s, s * 20);
 
-  square(x + 230 * s, y + 300 * s, s * 20);
-  square(x + 250 * s, y + 300 * s, s * 20);
-  square(x + 270 * s, y + 300 * s, s * 20);
-  square(x + 290 * s, y + 300 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 300 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 300 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 300 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 300 * s, s * 20);
 
-  square(x + 210 * s, y + 280 * s, s * 20);
-  square(x + 190 * s, y + 280 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 280 * s, s * 20);
 
   //upper part
-  square(x + 170 * s, y + 100 * s, s * 20);
-  square(x + 190 * s, y + 100 * s, s * 20);
-  square(x + 210 * s, y + 100 * s, s * 20);
-  square(x + 230 * s, y + 100 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 100 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 100 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 100 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 100 * s, s * 20);
 
   //eyes
-  square(x + 230 * s, y + 160 * s, s * 20);
-  square(x + 230 * s, y + 180 * s, s * 20);
-  square(x + 230 * s, y + 200 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 200 * s, s * 20);
 
-  square(x + 170 * s, y + 160 * s, s * 20);
-  square(x + 170 * s, y + 180 * s, s * 20);
-  square(x + 170 * s, y + 200 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 200 * s, s * 20);
 
   //left side
-  square(x + 90 * s, y + 280 * s, s * 20);
-  square(x + 90 * s, y + 260 * s, s * 20);
-  square(x + 90 * s, y + 240 * s, s * 20);
-  square(x + 110 * s, y + 260 * s, s * 20);
-  square(x + 70 * s, y + 220 * s, s * 20);
-  square(x + 70 * s, y + 200 * s, s * 20);
-  square(x + 90 * s, y + 180 * s, s * 20);
-  square(x + 90 * s, y + 160 * s, s * 20);
-  square(x + 110 * s, y + 140 * s, s * 20);
-  square(x + 130 * s, y + 120 * s, s * 20);
-  square(x + 150 * s, y + 120 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 70 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 70 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 120 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 120 * s, s * 20);
 
   //right side
-  square(x + 310 * s, y + 280 * s, s * 20);
-  square(x + 310 * s, y + 260 * s, s * 20);
-  square(x + 310 * s, y + 240 * s, s * 20);
-  square(x + 290 * s, y + 260 * s, s * 20);
-  square(x + 330 * s, y + 220 * s, s * 20);
-  square(x + 330 * s, y + 200 * s, s * 20);
-  square(x + 310 * s, y + 180 * s, s * 20);
-  square(x + 310 * s, y + 160 * s, s * 20);
-  square(x + 290 * s, y + 140 * s, s * 20);
-  square(x + 270 * s, y + 120 * s, s * 20);
-  square(x + 250 * s, y + 120 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 330 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 330 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 120 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 120 * s, s * 20);
 
   //body dark
   push();
   fill(239, 187, 204);
-  square(x + 110 * s, y + 240 * s, s * 20);
-  square(x + 130 * s, y + 260 * s, s * 20);
-  square(x + 290 * s, y + 240 * s, s * 20);
-  square(x + 270 * s, y + 260 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 260 * s, s * 20);
 
-  square(x + 150 * s, y + 220 * s, s * 20);
-  square(x + 130 * s, y + 220 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 220 * s, s * 20);
 
-  square(x + 250 * s, y + 220 * s, s * 20);
-  square(x + 270 * s, y + 220 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 220 * s, s * 20);
 
-  square(x + 310 * s, y + 200 * s, s * 20);
-  square(x + 90 * s, y + 200 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 200 * s, s * 20);
 
-  square(x + 110 * s, y + 160 * s, s * 20);
-  square(x + 290 * s, y + 160 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 160 * s, s * 20);
 
-  square(x + 130 * s, y + 140 * s, s * 20);
-  square(x + 270 * s, y + 140 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 140 * s, s * 20);
 
   //body light
   push();
   fill(253, 221, 230);
-  square(x + 130 * s, y + 240 * s, s * 20);
-  square(x + 150 * s, y + 240 * s, s * 20);
-  square(x + 150 * s, y + 260 * s, s * 20);
-  square(x + 170 * s, y + 260 * s, s * 20);
-  square(x + 170 * s, y + 240 * s, s * 20);
-  square(x + 190 * s, y + 240 * s, s * 20);
-  square(x + 190 * s, y + 260 * s, s * 20);
-  square(x + 210 * s, y + 260 * s, s * 20);
-  square(x + 210 * s, y + 240 * s, s * 20);
-  square(x + 230 * s, y + 240 * s, s * 20);
-  square(x + 230 * s, y + 260 * s, s * 20);
-  square(x + 250 * s, y + 260 * s, s * 20);
-  square(x + 250 * s, y + 240 * s, s * 20);
-  square(x + 270 * s, y + 240 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 260 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 240 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 240 * s, s * 20);
 
-  square(x + 210 * s, y + 160 * s, s * 20);
-  square(x + 210 * s, y + 180 * s, s * 20);
-  square(x + 210 * s, y + 200 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 200 * s, s * 20);
 
-  square(x + 190 * s, y + 160 * s, s * 20);
-  square(x + 190 * s, y + 180 * s, s * 20);
-  square(x + 190 * s, y + 200 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 200 * s, s * 20);
 
-  square(x + 170 * s, y + 220 * s, s * 20);
-  square(x + 190 * s, y + 220 * s, s * 20);
-  square(x + 210 * s, y + 220 * s, s * 20);
-  square(x + 230 * s, y + 220 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 220 * s, s * 20);
 
-  square(x + 110 * s, y + 220 * s, s * 20);
-  square(x + 90 * s, y + 220 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 90 * s, kirbyY + 220 * s, s * 20);
 
-  square(x + 290 * s, y + 220 * s, s * 20);
-  square(x + 310 * s, y + 220 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 220 * s, s * 20);
+  square(kirbyX + 310 * s, kirbyY + 220 * s, s * 20);
 
-  square(x + 290 * s, y + 200 * s, s * 20);
-  square(x + 270 * s, y + 200 * s, s * 20);
-  square(x + 250 * s, y + 200 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 200 * s, s * 20);
 
-  square(x + 290 * s, y + 180 * s, s * 20);
-  square(x + 270 * s, y + 180 * s, s * 20);
-  square(x + 250 * s, y + 180 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 180 * s, s * 20);
 
-  square(x + 110 * s, y + 200 * s, s * 20);
-  square(x + 130 * s, y + 200 * s, s * 20);
-  square(x + 150 * s, y + 200 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 200 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 200 * s, s * 20);
 
-  square(x + 110 * s, y + 180 * s, s * 20);
-  square(x + 130 * s, y + 180 * s, s * 20);
-  square(x + 150 * s, y + 180 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 180 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 180 * s, s * 20);
 
-  square(x + 130 * s, y + 160 * s, s * 20);
-  square(x + 150 * s, y + 160 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 160 * s, s * 20);
 
-  square(x + 250 * s, y + 160 * s, s * 20);
-  square(x + 270 * s, y + 160 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 160 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 160 * s, s * 20);
 
-  square(x + 250 * s, y + 140 * s, s * 20);
-  square(x + 230 * s, y + 140 * s, s * 20);
-  square(x + 210 * s, y + 140 * s, s * 20);
-  square(x + 190 * s, y + 140 * s, s * 20);
-  square(x + 170 * s, y + 140 * s, s * 20);
-  square(x + 150 * s, y + 140 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 140 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 140 * s, s * 20);
 
-  square(x + 170 * s, y + 120 * s, s * 20);
-  square(x + 190 * s, y + 120 * s, s * 20);
-  square(x + 210 * s, y + 120 * s, s * 20);
-  square(x + 230 * s, y + 120 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 120 * s, s * 20);
+  square(kirbyX + 190 * s, kirbyY + 120 * s, s * 20);
+  square(kirbyX + 210 * s, kirbyY + 120 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 120 * s, s * 20);
 
   push();
   fill(255, 40, 90);
   //feet
-  square(x + 110 * s, y + 280 * s, s * 20);
-  square(x + 130 * s, y + 280 * s, s * 20);
-  square(x + 150 * s, y + 280 * s, s * 20);
-  square(x + 170 * s, y + 280 * s, s * 20);
+  square(kirbyX + 110 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 130 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 150 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 170 * s, kirbyY + 280 * s, s * 20);
 
-  square(x + 230 * s, y + 280 * s, s * 20);
-  square(x + 250 * s, y + 280 * s, s * 20);
-  square(x + 270 * s, y + 280 * s, s * 20);
-  square(x + 290 * s, y + 280 * s, s * 20);
+  square(kirbyX + 230 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 250 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 270 * s, kirbyY + 280 * s, s * 20);
+  square(kirbyX + 290 * s, kirbyY + 280 * s, s * 20);
 
   pop();
 }
@@ -245,9 +248,10 @@ function keyReleased() {
 
 function moveKirby() {
   if (moveLeft) {
-    x -= 5;
-  } else if (moveRight) {
-    x += 5;
+    kirbyX -= 5; // Decrease Kirby's x position to move it left
+  }
+  if (moveRight) {
+    kirbyX += 5; // Increase Kirby's x position to move it right
   }
 }
 
@@ -257,15 +261,15 @@ function checkCollision(particle) {
   // Check for collision based on the shapes
   if (particle.shape === "square") {
     if (
-      x + 110 * s < particle.x + particleSize / 2 &&
-      x + 170 * s > particle.x - particleSize / 2 &&
-      y + 240 * s < particle.y + particleSize / 2 &&
-      y + 280 * s > particle.y - particleSize / 2
+      x + 110 * s < particle.x + 70 / 2 &&
+      x + 170 * s > particle.x - 70 / 2 &&
+      y + 240 * s < particle.y + 70 / 2 &&
+      y + 280 * s > particle.y - 70 / 2
     ) {
       return true;
     }
   } else if (particle.shape === "circle") {
-    if (d < (particleSize / 2) * s) {
+    if (d < (70 / 2) * s) {
       return true;
     }
   }
