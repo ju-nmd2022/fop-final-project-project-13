@@ -87,7 +87,6 @@ function createObstacle(color) {
 
   obstacles.push(obstacle);
 }
-
 // Function to update the game state
 function update() {
   // Clear the canvas
@@ -190,3 +189,230 @@ function createObstaclesInterval() {
 // Start the game
 createObstaclesInterval();
 update();
+
+//p5js version------------------------------------------------------------------------------------
+/*
+let character;
+let obstacles = [];
+let score = 0;
+let highScore = 0;
+let gameOver = false;
+let obstacleSpeed = 1;
+let obstacleInterval = 800;
+let elapsedTime = 0;
+
+function setup() {
+  let canvas = createCanvas(400, 400);
+  canvas.parent("gameCanvas");
+
+  character = {
+    x: width / 2,
+    y: height - 30,
+    width: 20,
+    height: 20,
+    speed: 3.5,
+  };
+
+  highScore = localStorage.getItem("highScore") || 0;
+
+  setInterval(() => {
+    let color;
+    if (random() < 0.6) {
+      color = "red"; // 60% chance of red square
+    } else {
+      color = "green"; // 40% chance of green square
+    }
+    createObstacle(color);
+
+    // Create an additional obstacle with a higher chance for purple
+    if (random() < 0.8) {
+      createObstacle("red"); // 80% chance of red square
+    } else {
+      createObstacle("green"); // 20% chance of green square
+    }
+  }, obstacleInterval);
+}
+
+function draw() {
+  background(220);
+
+  if (!gameOver) {
+    if (keyIsDown(LEFT_ARROW)) {
+      character.x -= character.speed;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+      character.x += character.speed;
+    }
+
+    fill("orange");
+    rect(character.x, character.y, character.width, character.height);
+
+    for (let i = 0; i < obstacles.length; i++) {
+      const obstacle = obstacles[i];
+      fill(obstacle.color);
+      rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+
+      obstacle.y += obstacleSpeed;
+
+      if (
+        obstacle.y + obstacle.height >= character.y &&
+        obstacle.y <= character.y + character.height &&
+        obstacle.x + obstacle.width >= character.x &&
+        obstacle.x <= character.x + character.width
+      ) {
+        if (obstacle.color === "orange") {
+          score++;
+        } else if (obstacle.color === "purple") {
+          gameOver = true;
+        }
+        obstacles.splice(i, 1);
+        i--;
+      }
+
+      if (
+        obstacle.y > height ||
+        (obstacle.color === "orange" && obstacle.y + obstacle.height >= height)
+      ) {
+        obstacles.splice(i, 1);
+        i--;
+      }
+    }
+
+    if (score > highScore) {
+      highScore = score;
+    }
+
+    fill("black");
+    textSize(20);
+    text("Score: " + score, 10, 20);
+    text("High Score: " + highScore, 10, 40);
+  } else {
+    fill("red");
+    textSize(40);
+    textAlign(CENTER, CENTER);
+    text("Game Over", width / 2, height / 2);
+  }
+}
+
+function createObstacle(color) {
+  const obstacleWidth = 40;
+  const obstacleHeight = 40;
+  const obstacleGap = 20;
+
+  const obstacle = {
+    x: random(obstacleWidth / 2, width - obstacleWidth / 2),
+    y: 0,
+    width: obstacleWidth,
+    height: obstacleHeight,
+    color: color === "green" ? "orange" : "purple",
+  };
+
+  let overlapping = true;
+  while (overlapping) {
+    obstacle.x = random(obstacleWidth / 2, width - obstacleWidth / 2);
+    obstacle.y = random(-height, 0);
+
+    overlapping = false;
+    for (let i = 0; i < obstacles.length; i++) {
+      const existingObstacle = obstacles[i];
+      if (
+        obstacle.x + obstacle.width + obstacleGap > existingObstacle.x &&
+        obstacle.x - obstacleGap <
+          existingObstacle.x + existingObstacle.width &&
+        obstacle.y + obstacle.height + obstacleGap > existingObstacle.y &&
+        obstacle.y - obstacleGap < existingObstacle.y + existingObstacle.height
+      ) {
+        overlapping = true;
+        break;
+      }
+    }
+  }
+
+  obstacles.push(obstacle);
+}
+
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    character.x -= character.speed;
+  } else if (keyCode === RIGHT_ARROW) {
+    character.x += character.speed;
+  }
+}
+
+function keyReleased() {
+  if (keyCode === LEFT_ARROW) {
+    character.x += character.speed;
+  } else if (keyCode === RIGHT_ARROW) {
+    character.x -= character.speed;
+  }
+}
+
+function updateHighScore() {
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("highScore", highScore);
+  }
+}
+
+// Start the game
+function startGame() {
+  obstacles = [];
+  score = 0;
+  gameOver = false;
+  obstacleSpeed = 1;
+  obstacleInterval = 800;
+  elapsedTime = 0;
+  highScore = localStorage.getItem("highScore") || 0;
+
+  loop();
+}
+
+// End the game
+function endGame() {
+  gameOver = true;
+  updateHighScore();
+  noLoop();
+}
+
+// Setup p5.js canvas and game
+function setup() {
+  let canvas = createCanvas(400, 400);
+  canvas.parent("gameCanvas");
+
+  document.addEventListener("keydown", keyPressed);
+  document.addEventListener("keyup", keyReleased);
+
+  startGame();
+}
+
+// Update game state
+function update() {
+  if (!gameOver) {
+    elapsedTime += deltaTime;
+
+    if (elapsedTime >= obstacleInterval) {
+      obstacleSpeed += 0.1;
+      obstacleInterval -= 50;
+      createObstacle("red");
+      createObstacle("green");
+      elapsedTime = 0;
+    }
+
+    draw();
+
+    if (gameOver) {
+      endGame();
+    }
+  }
+}
+
+// Update and draw game
+function draw() {
+  update();
+}
+
+// Entry point for p5.js
+function draw() {
+  background(220);
+  update();
+}
+*/
