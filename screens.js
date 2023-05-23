@@ -22,7 +22,7 @@ let bobY = 100;
 let velocity = 1;
 let acceleration = 0.2;
 let isGameActive = true;
-acceleration = 0.1;
+acceleration = 0.6;
 
 function preload() {
   startScreenImg = loadImage("welcomescreen.png");
@@ -88,7 +88,7 @@ function resetGame() {
   particles = [];
   isGameActive = true;
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     const particle = createParticle();
     particles.push(particle);
   }
