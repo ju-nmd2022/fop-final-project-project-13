@@ -4,68 +4,10 @@ let s = 1;
 let moveLeft = false;
 let moveRight = false;
 
-let particles = [];
-const particleSize = 70; // size of the particles
-
-function createParticle() {
-  const x = Math.random() * width;
-  const y = -particleSize; // Set initial y position to a negative value
-  const v = 0.5 + Math.random() * 3.5; // Adjust the velocity range
-  const shape = Math.random() < 0.5 ? "square" : "circle";
-  const color = shape === "square" ? "green" : "red";
-  return { x: x, y: y, velocity: v, shape: shape, color: color };
-}
-
-function drawParticle(particle) {
-  push();
-  translate(particle.x, particle.y);
-  noStroke();
-
-  if (particle.shape === "square") {
-    fill(190, 255, 180);
-    rectMode(CENTER);
-    rect(0, 0, particleSize, particleSize);
-  } else if (particle.shape === "circle") {
-    fill(240, 100, 120);
-    ellipse(0, 0, particleSize, particleSize);
-  }
-
-  pop();
-}
-
-function updateParticle(particle) {
-  particle.y = particle.y + particle.velocity;
-
-  // Wrap the particle when it reaches the bottom of the canvas
-  if (particle.y > height + particleSize) {
-    particle.y = -particleSize;
-  }
-}
-
 function setup() {
   createCanvas(900, 600);
   background(253, 212, 238);
-
-  for (let i = 0; i < 2; i++) {
-    const particle = createParticle();
-    particles.push(particle);
-  }
 }
-
-function draw() {
-  background(0, 0, 0);
-  for (let particle of particles) {
-    drawParticle(particle);
-    updateParticle(particle);
-  }
-
-  level1();
-  kirby(x, y, s);
-}
-// function setup() {
-//   createCanvas(900, 600);
-//   background(253, 212, 238);
-// }
 
 function level1() {
   push();

@@ -5,6 +5,7 @@ let img;
 
 function preload() {
   img = loadImage("winscreen.png");
+  img = loadImage("losescreen.png");
 }
 
 function setup() {

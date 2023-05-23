@@ -266,9 +266,9 @@ function gameScreen() {
 
   // Display the score
   textSize(24);
-  textAlign(LEFT);
   fill(0);
-  text("Score: " + score, width - 20, 30);
+  textSize(20);
+  text("Score: " + score, 10, 30);
 
   // Update and draw the particles
   for (let i = 0; i < particles.length; i++) {

@@ -294,6 +294,15 @@ function moveKirby() {
   }
 }
 
+function setup() {
+  createCanvas(900, 600);
+
+  for (let i = 0; i < 2; i++) {
+    const particle = createParticle();
+    particles.push(particle);
+  }
+}
+
 function draw() {
   level1();
   kirby(x + 540, y + 295, s * 0.3);
