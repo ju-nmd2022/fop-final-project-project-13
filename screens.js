@@ -419,17 +419,17 @@ function startScreen() {
 }
 
 function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
+  if (keyCode === 37) {
     moveLeft = true;
-  } else if (keyCode === RIGHT_ARROW) {
+  } else if (keyCode === 39) {
     moveRight = true;
   }
 }
 
 function keyReleased() {
-  if (keyCode === LEFT_ARROW) {
+  if (keyCode === 37) {
     moveLeft = false;
-  } else if (keyCode === RIGHT_ARROW) {
+  } else if (keyCode === 39) {
     moveRight = false;
   }
 }
