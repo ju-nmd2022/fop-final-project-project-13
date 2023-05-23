@@ -16,7 +16,7 @@ let score = 0;
 let kirbyX = 400;
 let kirbyY = 390;
 
-const particleSize = 70; // Set the size of the particles
+const particleSize = 70;
 
 let bobY = 100;
 let velocity = 1;
@@ -32,8 +32,8 @@ function preload() {
 
 function createParticle() {
   const x = Math.random() * width;
-  const y = -70; // Set initial y position to a negative value
-  const v = 0.5 + Math.random() * 5.3; // Adjust the velocity range
+  const y = -70; // Setting the initial y position to a negative value
+  const v = 0.5 + Math.random() * 5.3; // Adjust the velocity range, wiho
   const shape = Math.random() < 0.5 ? "square" : "circle";
   const color = shape === "square" ? "green" : "red";
   return { x: x, y: y, velocity: v, shape: shape, color: color };
@@ -59,7 +59,7 @@ function drawParticle(particle) {
 function updateParticle(particle) {
   particle.y = particle.y + particle.velocity;
 
-  // Wrap the particle when it reaches the bottom of the canvas
+  // Wrapping up the particle when it reaches the bottom of the canvas
   if (particle.y > height + 70) {
     particle.y = -70;
   }
@@ -71,11 +71,11 @@ function updateParticle(particle) {
       greenSquaresCollected++;
 
       if (greenSquaresCollected === 10) {
-        state = "finished"; // Change the game state to "finished"
+        state = "finished"; // Changing the game state to "finished"
       }
     } else if (particle.color === "red") {
       score = score - 1;
-      state = "over"; // Change the game state to "overScreen"
+      state = "over"; // Chaning the game state to "overScreen"
     }
 
     particle.y = -70; // Reset the particle's position
@@ -300,23 +300,23 @@ function gameScreen() {
   rect(0, 500, 700);
   pop();
 
-  // Display the score
+  // Displaying the score
   textSize(24);
   fill(0);
   textSize(20);
   text("Score: " + score, 10, 30);
 
-  // Update and draw the particles
+  // Updating and drawing the particles
   for (let i = 0; i < particles.length; i++) {
     const particle = particles[i];
     updateParticle(particle);
     drawParticle(particle);
   }
 
-  // Draw Kirby
+  // Drawing Kirby
   kirby();
 
-  // Move Kirby
+  // Moving Kirby
   if (moveLeft) {
     kirbyX -= 5;
   }
@@ -343,7 +343,6 @@ function keyReleased() {
   }
 }
 
-/*Talking bubble*/
 // Reference used to make this bubble= "Foundations of Programming - Emoji with a speechbubble", by Garrit. //
 function button(x, y, s) {
   push();
@@ -367,7 +366,7 @@ function button(x, y, s) {
   pop();
 }
 
-/*Talking bubble for the over and finished game*/
+// Talking bubble for the over and finished game //
 function buttonAgain(x, y, s) {
   push();
   fill(250, 200, 210);
@@ -443,7 +442,6 @@ function mouseClicked() {
       mouseY < y + 12 + 5
     ) {
       state = "game";
-      //gameScreen();
     }
   } else if (state === "over" || state === "finished") {
     if (
@@ -456,7 +454,6 @@ function mouseClicked() {
       velocity = 1;
       isGameActive = true;
       state = "game";
-      //gameScreen();
     }
   }
 }
