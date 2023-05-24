@@ -313,6 +313,13 @@ function gameScreen() {
   text("Level 1", 310, 40);
   rect(0, 500, 700);
   pop();
+  push();
+  fill(252, 193, 166);
+  textFont("Helvetica");
+  textSize(18);
+  text("Collect 3 green squares to level up", 222, 74);
+  rect(0, 500, 700);
+  pop();
 
   // Displaying the score
   fill(0);
@@ -350,12 +357,20 @@ function gameScreen() {
 }
 
 function gameScreenTwo() {
-  background(253, 212, 238);
+  background(223, 222, 248);
   push();
   fill(252, 193, 166);
   textFont("Helvetica");
   textSize(38);
   text("Level 2", 310, 40);
+  rect(0, 500, 700);
+  pop();
+
+  push();
+  fill(252, 193, 166);
+  textFont("Helvetica");
+  textSize(18);
+  text("Collect 6 green squares to level up", 222, 74);
   rect(0, 500, 700);
   pop();
 
@@ -394,12 +409,20 @@ function gameScreenTwo() {
 }
 
 function gameScreenThree() {
-  background(253, 212, 238);
+  background(254, 232, 178);
   push();
-  fill(252, 193, 166);
+  fill(252, 113, 156);
   textFont("Helvetica");
   textSize(38);
   text("Level 3", 310, 40);
+  rect(0, 500, 700);
+  pop();
+
+  push();
+  fill(252, 193, 166);
+  textFont("Helvetica");
+  textSize(18);
+  text("Collect 10 green squares to WIN", 222, 74);
   rect(0, 500, 700);
   pop();
 
