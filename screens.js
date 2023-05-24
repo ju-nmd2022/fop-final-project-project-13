@@ -17,6 +17,8 @@ let score = 0;
 let kirbyX = 400;
 let kirbyY = 390;
 
+let backgroundImage;
+
 const particleSize = 70;
 let isGameActive = true;
 
@@ -24,6 +26,7 @@ function preload() {
   startScreenImg = loadImage("welcomescreen.png");
   loseScreenImg = loadImage("losescreen.png");
   winScreenImg = loadImage("winscreen.png");
+  backgroundImage = loadImage("kirbybackground.jpg");
 }
 
 function createParticle() {
@@ -305,16 +308,16 @@ function checkCollision(particle) {
 }
 
 function gameScreen() {
-  background(253, 212, 238);
+  background(backgroundImage);
   push();
-  fill(252, 193, 166);
+  fill(237, 177, 177);
   textFont("Helvetica");
   textSize(38);
   text("Level 1", 310, 40);
   rect(0, 500, 700);
   pop();
   push();
-  fill(252, 193, 166);
+  fill(252, 216, 216);
   textFont("Helvetica");
   textSize(18);
   text("Collect 3 green squares to level up", 222, 74);
@@ -357,7 +360,7 @@ function gameScreen() {
 }
 
 function gameScreenTwo() {
-  background(223, 222, 248);
+  background(backgroundImage);
   push();
   fill(252, 193, 166);
   textFont("Helvetica");
@@ -367,7 +370,7 @@ function gameScreenTwo() {
   pop();
 
   push();
-  fill(252, 193, 166);
+  fill(252, 216, 216);
   textFont("Helvetica");
   textSize(18);
   text("Collect 6 green squares to level up", 222, 74);
@@ -409,7 +412,7 @@ function gameScreenTwo() {
 }
 
 function gameScreenThree() {
-  background(254, 232, 178);
+  background(backgroundImage);
   push();
   fill(252, 113, 156);
   textFont("Helvetica");
@@ -419,7 +422,7 @@ function gameScreenThree() {
   pop();
 
   push();
-  fill(252, 193, 166);
+  fill(252, 216, 216);
   textFont("Helvetica");
   textSize(18);
   text("Collect 10 green squares to WIN", 222, 74);
