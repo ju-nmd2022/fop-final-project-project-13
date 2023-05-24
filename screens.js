@@ -66,12 +66,19 @@ function updateParticle(particle) {
       score++;
       greenSquaresCollected++;
 
-      if (greenSquaresCollected === 10) {
-        state = "finished"; // Changing the game state to "finished"
+      if (state === "gameScreen" && greenSquaresCollected === 3) {
+        state = "gameScreenTwo";
+        resetGame();
+      } else if (state === "gameScreenTwo" && greenSquaresCollected === 6) {
+        state = "gameScreenThree";
+        resetGame();
+      } else if (state === "gameScreenThree" && greenSquaresCollected === 10) {
+        state = "finished";
       }
     } else if (particle.color === "red") {
       score = score - 1;
-      state = "over"; // Chaning the game state to "overScreen"
+      state = "over";
+      resetGame();
     }
 
     particle.y = -70; // Reset the particle's position
@@ -79,10 +86,10 @@ function updateParticle(particle) {
 }
 
 function resetGame() {
-  score = 0;
   greenSquaresCollected = 0;
   particles = [];
   isGameActive = true;
+  score = 0;
 
   for (let i = 0; i < 6; i++) {
     const particle = createParticle();
@@ -99,9 +106,9 @@ function setup() {
 }
 
 class Kirby {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(kirbyX, kirbyY) {
+    this.kirbyX = kirbyX;
+    this.kirbyY = kirbyY;
   }
 
   draw() {
@@ -274,175 +281,6 @@ class Kirby {
   }
 }
 
-// function kirby() {
-//   noStroke();
-//   push();
-//   fill(100, 100, 100);
-//   //legs
-//   square(kirbyX + 110 * s, kirbyY + 300 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 300 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 300 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 300 * s, s * 20);
-
-//   square(kirbyX + 230 * s, kirbyY + 300 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 300 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 300 * s, s * 20);
-//   square(kirbyX + 290 * s, kirbyY + 300 * s, s * 20);
-
-//   square(kirbyX + 210 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 280 * s, s * 20);
-
-//   //upper part
-//   square(kirbyX + 170 * s, kirbyY + 100 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 100 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 100 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 100 * s, s * 20);
-
-//   //eyes
-//   square(kirbyX + 230 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 200 * s, s * 20);
-
-//   square(kirbyX + 170 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 200 * s, s * 20);
-
-//   //left side
-//   square(kirbyX + 90 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 90 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 90 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 110 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 70 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 70 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 90 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 90 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 110 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 120 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 120 * s, s * 20);
-
-//   //right side
-//   square(kirbyX + 310 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 310 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 310 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 290 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 330 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 330 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 310 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 310 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 290 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 120 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 120 * s, s * 20);
-
-//   //body dark
-//   push();
-//   fill(239, 187, 204);
-//   square(kirbyX + 110 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 290 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 260 * s, s * 20);
-
-//   square(kirbyX + 150 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 220 * s, s * 20);
-
-//   square(kirbyX + 250 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 220 * s, s * 20);
-
-//   square(kirbyX + 310 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 90 * s, kirbyY + 200 * s, s * 20);
-
-//   square(kirbyX + 110 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 290 * s, kirbyY + 160 * s, s * 20);
-
-//   square(kirbyX + 130 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 140 * s, s * 20);
-
-//   //body light
-//   push();
-//   fill(253, 221, 230);
-//   square(kirbyX + 130 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 260 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 240 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 240 * s, s * 20);
-
-//   square(kirbyX + 210 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 200 * s, s * 20);
-
-//   square(kirbyX + 190 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 200 * s, s * 20);
-
-//   square(kirbyX + 170 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 220 * s, s * 20);
-
-//   square(kirbyX + 110 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 90 * s, kirbyY + 220 * s, s * 20);
-
-//   square(kirbyX + 290 * s, kirbyY + 220 * s, s * 20);
-//   square(kirbyX + 310 * s, kirbyY + 220 * s, s * 20);
-
-//   square(kirbyX + 290 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 200 * s, s * 20);
-
-//   square(kirbyX + 290 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 180 * s, s * 20);
-
-//   square(kirbyX + 110 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 200 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 200 * s, s * 20);
-
-//   square(kirbyX + 110 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 180 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 180 * s, s * 20);
-
-//   square(kirbyX + 130 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 160 * s, s * 20);
-
-//   square(kirbyX + 250 * s, kirbyY + 160 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 160 * s, s * 20);
-
-//   square(kirbyX + 250 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 140 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 140 * s, s * 20);
-
-//   square(kirbyX + 170 * s, kirbyY + 120 * s, s * 20);
-//   square(kirbyX + 190 * s, kirbyY + 120 * s, s * 20);
-//   square(kirbyX + 210 * s, kirbyY + 120 * s, s * 20);
-//   square(kirbyX + 230 * s, kirbyY + 120 * s, s * 20);
-
-//   push();
-//   fill(255, 40, 90);
-//   //feet
-//   square(kirbyX + 110 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 130 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 150 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 170 * s, kirbyY + 280 * s, s * 20);
-
-//   square(kirbyX + 230 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 250 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 270 * s, kirbyY + 280 * s, s * 20);
-//   square(kirbyX + 290 * s, kirbyY + 280 * s, s * 20);
-
-//   pop();
-// }
-
 function checkCollision(particle) {
   const kirbyLeft = kirbyX + 110 * s;
   const kirbyRight = kirbyX + 310 * s;
@@ -470,14 +308,16 @@ function gameScreen() {
   background(253, 212, 238);
   push();
   fill(252, 193, 166);
+  textFont("Helvetica");
+  textSize(38);
+  text("Level 1", 310, 40);
   rect(0, 500, 700);
   pop();
 
   // Displaying the score
-  textSize(24);
   fill(0);
-  textSize(20);
-  text("Score: " + score, 10, 30);
+  text("Score: " + score, 15, 35);
+  textSize(28);
 
   // Updating and drawing the particles
   for (let i = 0; i < particles.length; i++) {
@@ -495,6 +335,105 @@ function gameScreen() {
   }
   if (moveRight) {
     kirbyX += 5;
+  }
+
+  if (greenSquaresCollected === 3) {
+    score = 0;
+    state = "gameScreenTwo";
+    particles = [];
+    for (let i = 0; i < 6; i++) {
+      const particle = createParticle();
+      particles.push(particle);
+    }
+    greenSquaresCollected = 0;
+  }
+}
+
+function gameScreenTwo() {
+  background(253, 212, 238);
+  push();
+  fill(252, 193, 166);
+  textFont("Helvetica");
+  textSize(38);
+  text("Level 2", 310, 40);
+  rect(0, 500, 700);
+  pop();
+
+  // Displaying the score
+  fill(0);
+  text("Score: " + score, 15, 35);
+  textSize(28);
+
+  // Updating and drawing the particles
+  for (let i = 0; i < particles.length; i++) {
+    const particle = particles[i];
+    updateParticle(particle);
+    drawParticle(particle);
+  }
+
+  // Drawing Kirby
+  kirby.draw();
+
+  // Moving Kirby
+  if (moveLeft) {
+    kirbyX -= 5;
+  }
+  if (moveRight) {
+    kirbyX += 5;
+  }
+
+  if (greenSquaresCollected === 6) {
+    state = "gameScreenThree";
+    particles = [];
+    for (let i = 0; i < 10; i++) {
+      const particle = createParticle();
+      particles.push(particle);
+    }
+    greenSquaresCollected = 0;
+  }
+}
+
+function gameScreenThree() {
+  background(253, 212, 238);
+  push();
+  fill(252, 193, 166);
+  textFont("Helvetica");
+  textSize(38);
+  text("Level 3", 310, 40);
+  rect(0, 500, 700);
+  pop();
+
+  // Displaying the score
+  fill(0);
+  text("Score: " + score, 15, 35);
+  textSize(28);
+
+  // Updating and drawing the particles
+  for (let i = 0; i < particles.length; i++) {
+    const particle = particles[i];
+    updateParticle(particle);
+    drawParticle(particle);
+  }
+
+  // Drawing Kirby
+  kirby.draw();
+
+  // Moving Kirby
+  if (moveLeft) {
+    kirbyX -= 5;
+  }
+  if (moveRight) {
+    kirbyX += 5;
+  }
+
+  if (greenSquaresCollected === 10) {
+    state = "finished";
+    particles = [];
+    for (let i = 0; i < 10; i++) {
+      const particle = createParticle();
+      particles.push(particle);
+    }
+    greenSquaresCollected = 0;
   }
 }
 
@@ -636,9 +575,13 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     gameScreen();
+  } else if (state === "gameScreenTwo") {
+    gameScreenTwo();
+  } else if (state === "gameScreenThree") {
+    gameScreenThree();
   } else if (state === "over") {
     overScreen();
-    resetGame(); // Call resetGame function when in "over" state
+    resetGame();
   } else if (state === "finished") {
     finishedScreen();
     resetGame();
