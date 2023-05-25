@@ -534,7 +534,7 @@ function buttonAgain(x, y, s) {
 }
 
 function overScreen() {
-  image(loseScreenImg, 0, 40, 700, 600);
+  image(loseScreenImg, 0, 0, 700, 600);
   push();
   fill(255, 255, 255);
   buttonAgain(x + 200, y + 90, s * 1.6);
@@ -542,7 +542,7 @@ function overScreen() {
 }
 
 function finishedScreen() {
-  image(winScreenImg, 0, 40, 700, 600);
+  image(winScreenImg, 0, 0, 700, 600);
   push();
   fill(255, 255, 255);
   buttonAgain(x + 200, y + 90, s * 1.6);
