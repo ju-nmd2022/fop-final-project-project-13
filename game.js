@@ -112,7 +112,7 @@ function setup() {
 }
 
 // Citation: We used chatGPT to help us detect why our first collusion function did not work, and got help to get the values right
-// Checking if there are any collusion between kirby and the geometrics
+// Checking if there are any collusion between kirby and the geometrics) //
 function checkCollision(geometric) {
   const kirbyLeft = kirbyX + 110 * s;
   const kirbyRight = kirbyX + 310 * s;
