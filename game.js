@@ -1,11 +1,11 @@
+import Kirby from "kirby.js";
+
 //chat gpt helped us with a lot of issues throughout the game
 
 let x = 100;
 let y = 100;
 let s = 0.35;
-let rotation = 0;
 let state = "start";
-let buttonIsClicked = false;
 let startScreenImg;
 let loseScreenImg;
 let winScreenImg;
@@ -14,8 +14,6 @@ let kirby;
 let level = 0;
 
 let particles = [];
-let moveLeft = false;
-let moveRight = false;
 let score = 0;
 let kirbyX = 400;
 let kirbyY = 390;
@@ -105,185 +103,9 @@ function resetGame() {
 function setup() {
   createCanvas(700, 600);
   background(253, 212, 238);
-  kirby = new Kirby(100, 100);
+  kirby = new Kirby(kirbyX, kirbyY);
 
   resetGame();
-}
-
-class Kirby {
-  constructor(kirbyX, kirbyY) {
-    this.kirbyX = kirbyX;
-    this.kirbyY = kirbyY;
-  }
-
-  draw() {
-    noStroke();
-    push();
-    fill(100, 100, 100);
-    //legs
-    square(kirbyX + 110 * s, kirbyY + 300 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 300 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 300 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 300 * s, s * 20);
-
-    square(kirbyX + 230 * s, kirbyY + 300 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 300 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 300 * s, s * 20);
-    square(kirbyX + 290 * s, kirbyY + 300 * s, s * 20);
-
-    square(kirbyX + 210 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 280 * s, s * 20);
-
-    //upper part
-    square(kirbyX + 170 * s, kirbyY + 100 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 100 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 100 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 100 * s, s * 20);
-
-    //eyes
-    square(kirbyX + 230 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 200 * s, s * 20);
-
-    square(kirbyX + 170 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 200 * s, s * 20);
-
-    //left side
-    square(kirbyX + 90 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 90 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 90 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 110 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 70 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 70 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 90 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 90 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 110 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 120 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 120 * s, s * 20);
-
-    //right side
-    square(kirbyX + 310 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 310 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 310 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 290 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 330 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 330 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 310 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 310 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 290 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 120 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 120 * s, s * 20);
-
-    //body dark
-    push();
-    fill(239, 187, 204);
-    square(kirbyX + 110 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 290 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 260 * s, s * 20);
-
-    square(kirbyX + 150 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 220 * s, s * 20);
-
-    square(kirbyX + 250 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 220 * s, s * 20);
-
-    square(kirbyX + 310 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 90 * s, kirbyY + 200 * s, s * 20);
-
-    square(kirbyX + 110 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 290 * s, kirbyY + 160 * s, s * 20);
-
-    square(kirbyX + 130 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 140 * s, s * 20);
-
-    //body light
-    push();
-    fill(253, 221, 230);
-    square(kirbyX + 130 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 260 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 240 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 240 * s, s * 20);
-
-    square(kirbyX + 210 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 200 * s, s * 20);
-
-    square(kirbyX + 190 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 200 * s, s * 20);
-
-    square(kirbyX + 170 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 220 * s, s * 20);
-
-    square(kirbyX + 110 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 90 * s, kirbyY + 220 * s, s * 20);
-
-    square(kirbyX + 290 * s, kirbyY + 220 * s, s * 20);
-    square(kirbyX + 310 * s, kirbyY + 220 * s, s * 20);
-
-    square(kirbyX + 290 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 200 * s, s * 20);
-
-    square(kirbyX + 290 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 180 * s, s * 20);
-
-    square(kirbyX + 110 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 200 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 200 * s, s * 20);
-
-    square(kirbyX + 110 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 180 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 180 * s, s * 20);
-
-    square(kirbyX + 130 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 160 * s, s * 20);
-
-    square(kirbyX + 250 * s, kirbyY + 160 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 160 * s, s * 20);
-
-    square(kirbyX + 250 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 140 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 140 * s, s * 20);
-
-    square(kirbyX + 170 * s, kirbyY + 120 * s, s * 20);
-    square(kirbyX + 190 * s, kirbyY + 120 * s, s * 20);
-    square(kirbyX + 210 * s, kirbyY + 120 * s, s * 20);
-    square(kirbyX + 230 * s, kirbyY + 120 * s, s * 20);
-
-    push();
-    fill(255, 40, 90);
-    //feet
-    square(kirbyX + 110 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 130 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 150 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 170 * s, kirbyY + 280 * s, s * 20);
-
-    square(kirbyX + 230 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 250 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 270 * s, kirbyY + 280 * s, s * 20);
-    square(kirbyX + 290 * s, kirbyY + 280 * s, s * 20);
-
-    pop();
-  }
 }
 
 function checkCollision(particle) {
@@ -343,10 +165,10 @@ function gameScreen() {
   kirby.draw();
 
   // Moving Kirby
-  if (moveLeft) {
+  if (keyIsDown(37)) {
     kirbyX -= 5;
   }
-  if (moveRight) {
+  if (keyIsDown(39)) {
     kirbyX += 5;
   }
 
@@ -368,24 +190,6 @@ function gameScreen() {
     if (level == 4) {
       state = "finished";
     }
-  }
-}
-
-function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
-    moveLeft = true;
-  }
-  if (keyCode === RIGHT_ARROW) {
-    moveRight = true;
-  }
-}
-
-function keyReleased() {
-  if (keyCode === LEFT_ARROW) {
-    moveLeft = false;
-  }
-  if (keyCode === RIGHT_ARROW) {
-    moveRight = false;
   }
 }
 
@@ -461,22 +265,6 @@ function startScreen() {
   background(213, 212, 238);
   image(startScreenImg, 0, 0, 700, 600);
   button(x + 135, y + 25, s * 1.6);
-}
-
-function keyPressed() {
-  if (keyCode === 37) {
-    moveLeft = true;
-  } else if (keyCode === 39) {
-    moveRight = true;
-  }
-}
-
-function keyReleased() {
-  if (keyCode === 37) {
-    moveLeft = false;
-  } else if (keyCode === 39) {
-    moveRight = false;
-  }
 }
 
 function mouseClicked() {
