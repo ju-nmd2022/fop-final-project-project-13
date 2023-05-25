@@ -8,6 +8,8 @@ let score = 0;
 let kirbyX = 400;
 let kirbyY = 390;
 
+let bg;
+
 const particleSize = 70; // Set the size of the particles
 
 function createParticle() {
@@ -57,7 +59,7 @@ function updateParticle(particle) {
 
 function setup() {
   createCanvas(700, 600);
-  background(253, 212, 238);
+  bg = loadImage("kirbybackground.jpg");
 
   for (let i = 0; i < 4; i++) {
     const particle = createParticle();
@@ -317,7 +319,7 @@ function drawScore() {
 }
 
 function draw() {
-  background(253, 212, 238);
+  background(bg);
   // Move Kirby based on the key inputs
   moveKirby();
   kirby(x + 500, y + 295, s * 0.3);
