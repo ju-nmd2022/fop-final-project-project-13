@@ -11,6 +11,7 @@ let loseScreenImg;
 let winScreenImg;
 let greenSquaresCollected = 0;
 let kirby;
+let level = 0;
 
 let particles = [];
 let moveLeft = false;
@@ -31,11 +32,20 @@ function preload() {
   backgroundImage = loadImage("kirbybackground.jpg");
 }
 
-function createParticle() {
+function createSquare() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
-  const v = 0.5 + Math.random() * 5.3; // Adjust the velocity range, wiho
-  const shape = Math.random() < 0.5 ? "square" : "circle";
+  const v = level + Math.random() * 5.3; // Adjust the velocity range, wiho
+  const shape = "square";
+  const color = shape === "square" ? "green" : "red";
+  return { x: x, y: y, velocity: v, shape: shape, color: color };
+}
+
+function createCircle() {
+  const x = Math.random() * width;
+  const y = -70; // Setting the initial y position to a negative value
+  const v = level + Math.random() * 5.3; // Adjust the velocity range, wiho
+  const shape = "circle";
   const color = shape === "square" ? "green" : "red";
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
@@ -53,7 +63,6 @@ function drawParticle(particle) {
     fill(240, 100, 120);
     ellipse(0, 0, 70, 70);
   }
-
   pop();
 }
 
@@ -62,6 +71,7 @@ function updateParticle(particle) {
 
   // Wrapping up the particle when it reaches the bottom of the canvas
   if (particle.y > height + 70) {
+    particle.x = Math.random() * width;
     particle.y = -70;
   }
 
@@ -70,22 +80,11 @@ function updateParticle(particle) {
     if (particle.color === "green") {
       score++;
       greenSquaresCollected++;
-
-      if (state === "gameScreen" && greenSquaresCollected === 3) {
-        state = "gameScreenTwo";
-        resetGame();
-      } else if (state === "gameScreenTwo" && greenSquaresCollected === 6) {
-        state = "gameScreenThree";
-        resetGame();
-      } else if (state === "gameScreenThree" && greenSquaresCollected === 10) {
-        state = "finished";
-      }
     } else if (particle.color === "red") {
-      score = score - 1;
       state = "over";
       resetGame();
     }
-
+    particle.x = Math.random() * width;
     particle.y = -70; // Reset the particle's position
   }
 }
@@ -95,11 +94,7 @@ function resetGame() {
   particles = [];
   isGameActive = true;
   score = 0;
-
-  for (let i = 0; i < 6; i++) {
-    const particle = createParticle();
-    particles.push(particle);
-  }
+  level = 0;
 }
 
 function setup() {
@@ -315,14 +310,15 @@ function gameScreen() {
   fill(237, 177, 177);
   textFont("Helvetica");
   textSize(38);
-  text("Level 1", 310, 40);
+  text("Level " + level.toString(), 310, 40);
   rect(0, 500, 700);
   pop();
   push();
   fill(252, 216, 216);
   textFont("Helvetica");
   textSize(18);
-  text("Collect 3 green squares to level up", 222, 74);
+  goal = level * 3;
+  text("Collect " + goal.toString() + " green squares to level up", 222, 74);
   rect(0, 500, 700);
   pop();
 
@@ -349,119 +345,24 @@ function gameScreen() {
     kirbyX += 5;
   }
 
-  if (greenSquaresCollected === 3) {
+  if (greenSquaresCollected === goal) {
+    greenSquaresCollected = 0;
+    particles = [];
     score = 0;
-    state = "gameScreenTwo";
-    particles = [];
-    for (let i = 0; i < 6; i++) {
-      const particle = createParticle();
+    level += 1;
+
+    for (let i = 0; i < -1 * level + 4; i++) {
+      const particle = createSquare();
+      particles.push(particle);
+    }
+    for (let i = 0; i < level; i++) {
+      const particle = createCircle();
       particles.push(particle);
     }
     greenSquaresCollected = 0;
-  }
-}
-
-function gameScreenTwo() {
-  background(backgroundImage);
-  push();
-  fill(252, 193, 166);
-  textFont("Helvetica");
-  textSize(38);
-  text("Level 2", 310, 40);
-  rect(0, 500, 700);
-  pop();
-
-  push();
-  fill(252, 216, 216);
-  textFont("Helvetica");
-  textSize(18);
-  text("Collect 6 green squares to level up", 222, 74);
-  rect(0, 500, 700);
-  pop();
-
-  // Displaying the score
-  fill(0);
-  text("Score: " + score, 15, 35);
-  textSize(28);
-
-  // Updating and drawing the particles
-  for (let i = 0; i < particles.length; i++) {
-    const particle = particles[i];
-    updateParticle(particle);
-    drawParticle(particle);
-  }
-
-  // Drawing Kirby
-  kirby.draw();
-
-  // Moving Kirby
-  if (moveLeft) {
-    kirbyX -= 5;
-  }
-  if (moveRight) {
-    kirbyX += 5;
-  }
-
-  if (greenSquaresCollected === 6) {
-    state = "gameScreenThree";
-    particles = [];
-    for (let i = 0; i < 10; i++) {
-      const particle = createParticle();
-      particles.push(particle);
+    if (level == 4) {
+      state = "finished";
     }
-    greenSquaresCollected = 0;
-  }
-}
-
-function gameScreenThree() {
-  background(backgroundImage);
-  push();
-  fill(252, 113, 156);
-  textFont("Helvetica");
-  textSize(38);
-  text("Level 3", 310, 40);
-  rect(0, 500, 700);
-  pop();
-
-  push();
-  fill(252, 216, 216);
-  textFont("Helvetica");
-  textSize(18);
-  text("Collect 10 green squares to WIN", 222, 74);
-  rect(0, 500, 700);
-  pop();
-
-  // Displaying the score
-  fill(0);
-  text("Score: " + score, 15, 35);
-  textSize(28);
-
-  // Updating and drawing the particles
-  for (let i = 0; i < particles.length; i++) {
-    const particle = particles[i];
-    updateParticle(particle);
-    drawParticle(particle);
-  }
-
-  // Drawing Kirby
-  kirby.draw();
-
-  // Moving Kirby
-  if (moveLeft) {
-    kirbyX -= 5;
-  }
-  if (moveRight) {
-    kirbyX += 5;
-  }
-
-  if (greenSquaresCollected === 10) {
-    state = "finished";
-    particles = [];
-    for (let i = 0; i < 10; i++) {
-      const particle = createParticle();
-      particles.push(particle);
-    }
-    greenSquaresCollected = 0;
   }
 }
 
@@ -601,10 +502,6 @@ function draw() {
     startScreen();
   } else if (state === "game") {
     gameScreen();
-  } else if (state === "gameScreenTwo") {
-    gameScreenTwo();
-  } else if (state === "gameScreenThree") {
-    gameScreenThree();
   } else if (state === "over") {
     overScreen();
     resetGame();
