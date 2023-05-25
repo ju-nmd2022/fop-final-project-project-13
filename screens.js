@@ -585,8 +585,6 @@ function mouseClicked() {
       mouseY > y + 55 &&
       mouseY < y + 55 + 23
     ) {
-      bobY = 100;
-      velocity = 1;
       isGameActive = true;
       state = "game";
     }
