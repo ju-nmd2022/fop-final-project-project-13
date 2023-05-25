@@ -315,6 +315,8 @@ function draw() {
   }
 }
 
+// Citation: We used chatGPT to debug our code several times during our coding process when the code was not exctecuted in the way we wanted/went black
+
 window.preload = preload;
 window.setup = setup;
 window.mouseClicked = mouseClicked;
