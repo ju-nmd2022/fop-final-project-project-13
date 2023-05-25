@@ -29,7 +29,12 @@ function preload() {
   startScreenImg = loadImage("welcomescreen.png");
   loseScreenImg = loadImage("losescreen.png");
   winScreenImg = loadImage("winscreen.png");
-  backgroundImage = loadImage("kirbybackground.jpg");
+  backgroundImage = [
+    loadImage("kirbybackground.jpg"),
+    loadImage("kirbybackground.jpg"),
+    loadImage("kirbybackground2.jpg"),
+    loadImage("kirbybackground3jpg"),
+  ];
 }
 
 function createSquare() {
@@ -305,7 +310,7 @@ function checkCollision(particle) {
 }
 
 function gameScreen() {
-  background(backgroundImage);
+  background(backgroundImage[level]);
   push();
   fill(237, 177, 177);
   textFont("Helvetica");
