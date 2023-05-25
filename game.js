@@ -12,13 +12,13 @@ let greenSquaresCollected = 0;
 let kirby;
 let level = 0;
 let goal = 0;
-let particles = []; // Array to store falling geometrics
+let geometrics = []; // Array to store falling geometrics
 let score = 0;
 let kirbyX = 400;
 let kirbyY = 390;
 let backgroundImage; // Array to store background images, contains references
 
-const particleSize = 70;
+const geometricSize = 70;
 let isGameActive = true;
 
 // Loading our images
@@ -34,6 +34,7 @@ function preload() {
   ];
 }
 
+// Citation/Inspiration = "Foundations of Programming - The particle example (snow) from the lecture at 03.02, by Garrit. //
 // Creation of the falling geometrics
 function createSquare() {
   const x = Math.random() * width;
@@ -54,49 +55,49 @@ function createCircle() {
 }
 
 // Drawing and updating the geometrics
-function drawParticle(particle) {
+function drawGeometric(geometric) {
   push();
-  translate(particle.x, particle.y);
+  translate(geometric.x, geometric.y);
   noStroke();
 
-  if (particle.shape === "square") {
+  if (geometric.shape === "square") {
     fill(190, 255, 180);
     rectMode(CENTER);
     rect(0, 0, 70, 70);
-  } else if (particle.shape === "circle") {
+  } else if (geometric.shape === "circle") {
     fill(240, 100, 120);
     ellipse(0, 0, 70, 70);
   }
   pop();
 }
 
-function updateParticle(particle) {
-  particle.y = particle.y + particle.velocity;
+function updateGeometric(geometric) {
+  geometric.y = geometric.y + geometric.velocity;
 
   // Wrapping up the particle when it reaches the bottom of the canvas
-  if (particle.y > height + 70) {
-    particle.x = Math.random() * width;
-    particle.y = -70;
+  if (geometric.y > height + 70) {
+    geometric.x = Math.random() * width;
+    geometric.y = -70;
   }
 
-  if (checkCollision(particle)) {
+  if (checkCollision(geometric)) {
     // Particle collided with Kirby
-    if (particle.color === "green") {
+    if (geometric.color === "green") {
       score++;
       greenSquaresCollected++;
-    } else if (particle.color === "red") {
+    } else if (geometric.color === "red") {
       state = "over";
       resetGame();
     }
-    particle.x = Math.random() * width; // Making them appear on different x positions over again
-    particle.y = -70; // Reset the particle's position
+    geometric.x = Math.random() * width; // Making them appear on different x positions over again
+    geometric.y = -70; // Reset the particle's position
   }
 }
 
 // Resetting the game
 function resetGame() {
   greenSquaresCollected = 0;
-  particles = [];
+  geometrics = [];
   isGameActive = true;
   score = 0;
   level = 0;
@@ -112,22 +113,22 @@ function setup() {
 
 // Citation: We used chatGPT to help us detect why our first collusion function did not work, and got help to get the values right
 // Checking if there are any collusion between kirby and the particles (geometrics)
-function checkCollision(particle) {
+function checkCollision(geometric) {
   const kirbyLeft = kirbyX + 110 * s;
   const kirbyRight = kirbyX + 310 * s;
   const kirbyTop = kirbyY + 190 * s;
   const kirbyBottom = kirbyY + 400 * s;
 
-  const particleLeft = particle.x - particleSize / 2;
-  const particleRight = particle.x + particleSize / 2;
-  const particleTop = particle.y - particleSize / 2;
-  const particleBottom = particle.y + particleSize / 2;
+  const geometricLeft = geometric.x - geometricSize / 2;
+  const geometricRight = geometric.x + geometricSize / 2;
+  const geometricTop = geometric.y - geometricSize / 2;
+  const geometricBottom = geometric.y + geometricSize / 2;
 
   if (
-    particleRight < kirbyLeft ||
-    particleLeft > kirbyRight ||
-    particleBottom < kirbyTop ||
-    particleTop > kirbyBottom
+    geometricRight < kirbyLeft ||
+    geometricLeft > kirbyRight ||
+    geometricBottom < kirbyTop ||
+    geometricTop > kirbyBottom
   ) {
     return false; // No collision detected
   } else {
@@ -157,11 +158,12 @@ function gameScreen() {
   text("Score: " + score, 15, 35);
   textSize(28);
 
+  // Citation/Inspiration = "Foundations of Programming - The particle example (snow) from the lecture at 03.02, by Garrit. //
   // Here we are through each particle in the particles array and updating/drawing them
-  for (let i = 0; i < particles.length; i++) {
-    const particle = particles[i];
-    updateParticle(particle);
-    drawParticle(particle);
+  for (let i = 0; i < geometrics.length; i++) {
+    const geometric = geometrics[i];
+    updateGeometric(geometric);
+    drawGeometric(geometric);
   }
 
   // Drawing Kirby
@@ -178,19 +180,19 @@ function gameScreen() {
   // Checking if the goal is reached to level up
   if (greenSquaresCollected === goal) {
     greenSquaresCollected = 0;
-    particles = [];
+    geometrics = [];
     score = 0;
     level += 1;
 
     // Got help from teaching assistant to calculate the math in how we could go from gameScreen functions, into one with the help of new level variable, goal variable and math!
     // Pushing new particles into the array based on the level
     for (let i = 0; i < -1 * level + 4; i++) {
-      const particle = createSquare();
-      particles.push(particle);
+      const geometric = createSquare();
+      geometrics.push(geometric);
     }
     for (let i = 0; i < level; i++) {
-      const particle = createCircle();
-      particles.push(particle);
+      const geometric = createCircle();
+      geometrics.push(geometric);
     }
     greenSquaresCollected = 0;
     if (level == 4) {
