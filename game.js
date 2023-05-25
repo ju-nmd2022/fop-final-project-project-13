@@ -1,5 +1,6 @@
 import Kirby from "./kirby.js";
 
+//declaring all of our variables
 let x = 100;
 let y = 100;
 let s = 0.35;
@@ -250,6 +251,7 @@ function buttonAgain(x, y, s) {
   pop();
 }
 
+//our over screens whether when you start, win or loose game :)
 function overScreen() {
   image(loseScreenImg, 0, 0, 700, 600);
   push();
@@ -296,6 +298,7 @@ function mouseClicked() {
   }
 }
 
+//setting the screen statements up!
 function draw() {
   if (state === "start") {
     startScreen();
