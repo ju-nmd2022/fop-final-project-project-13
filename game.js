@@ -1,3 +1,5 @@
+//chat gpt helped us with a lot of issues throughout the game
+
 let x = 100;
 let y = 100;
 let s = 0.35;
