@@ -4,7 +4,7 @@ export default class Kirby {
     this.kirbyY = kirbyY;
   }
 
-  draw() {
+  draw(kirbyX, kirbyY, s) {
     noStroke();
     push();
     fill(100, 100, 100);

@@ -1,4 +1,4 @@
-import Kirby from "kirby.js";
+import Kirby from "./kirby.js";
 
 //chat gpt helped us with a lot of issues throughout the game
 
@@ -12,7 +12,7 @@ let winScreenImg;
 let greenSquaresCollected = 0;
 let kirby;
 let level = 0;
-
+let goal = 0;
 let particles = [];
 let score = 0;
 let kirbyX = 400;
@@ -138,7 +138,7 @@ function gameScreen() {
   textFont("Helvetica");
   textSize(38);
   text("Level " + level.toString(), 310, 40);
-
+  rect(0, 500, 700);
   pop();
   push();
   fill(252, 216, 216);
@@ -146,7 +146,7 @@ function gameScreen() {
   textSize(18);
   goal = level * 3;
   text("Collect " + goal.toString() + " green squares to level up", 222, 74);
-
+  rect(0, 500, 700);
   pop();
 
   // Displaying the score
@@ -162,7 +162,7 @@ function gameScreen() {
   }
 
   // Drawing Kirby
-  kirby.draw();
+  kirby.draw(kirbyX, kirbyY, s);
 
   // Moving Kirby
   if (keyIsDown(37)) {
@@ -303,3 +303,8 @@ function draw() {
     resetGame();
   }
 }
+
+window.preload = preload;
+window.setup = setup;
+window.mouseClicked = mouseClicked;
+window.draw = draw;
