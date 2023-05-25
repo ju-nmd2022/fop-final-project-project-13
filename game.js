@@ -74,14 +74,14 @@ function drawGeometric(geometric) {
 function updateGeometric(geometric) {
   geometric.y = geometric.y + geometric.velocity;
 
-  // Wrapping up the particle when it reaches the bottom of the canvas
+  // Wrapping up the geometric when it reaches the bottom of the canvas
   if (geometric.y > height + 70) {
     geometric.x = Math.random() * width;
     geometric.y = -70;
   }
 
   if (checkCollision(geometric)) {
-    // Particle collided with Kirby
+    // Geometrics collided with Kirby
     if (geometric.color === "green") {
       score++;
       greenSquaresCollected++;
@@ -90,7 +90,7 @@ function updateGeometric(geometric) {
       resetGame();
     }
     geometric.x = Math.random() * width; // Making them appear on different x positions over again
-    geometric.y = -70; // Reset the particle's position
+    geometric.y = -70; // Reset the geometric's position
   }
 }
 
@@ -112,7 +112,7 @@ function setup() {
 }
 
 // Citation: We used chatGPT to help us detect why our first collusion function did not work, and got help to get the values right
-// Checking if there are any collusion between kirby and the particles (geometrics)
+// Checking if there are any collusion between kirby and the geometrics
 function checkCollision(geometric) {
   const kirbyLeft = kirbyX + 110 * s;
   const kirbyRight = kirbyX + 310 * s;
