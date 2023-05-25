@@ -32,8 +32,8 @@ function preload() {
   backgroundImage = [
     loadImage("kirbybackground.jpg"),
     loadImage("kirbybackground.jpg"),
-    loadImage("kirbybackground2.jpg"),
-    loadImage("kirbybackground3jpg"),
+    loadImage("forestbackground.jpg"),
+    loadImage("balloonbackground.jpg"),
   ];
 }
 
@@ -316,7 +316,7 @@ function gameScreen() {
   textFont("Helvetica");
   textSize(38);
   text("Level " + level.toString(), 310, 40);
-  rect(0, 500, 700);
+
   pop();
   push();
   fill(252, 216, 216);
@@ -324,7 +324,7 @@ function gameScreen() {
   textSize(18);
   goal = level * 3;
   text("Collect " + goal.toString() + " green squares to level up", 222, 74);
-  rect(0, 500, 700);
+
   pop();
 
   // Displaying the score
