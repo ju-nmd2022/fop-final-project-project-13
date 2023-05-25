@@ -1,7 +1,5 @@
 import Kirby from "./kirby.js";
 
-//chat gpt helped us with a lot of issues throughout the game
-
 let x = 100;
 let y = 100;
 let s = 0.35;
@@ -13,16 +11,16 @@ let greenSquaresCollected = 0;
 let kirby;
 let level = 0;
 let goal = 0;
-let particles = [];
+let particles = []; // Array to store falling geometrics
 let score = 0;
 let kirbyX = 400;
 let kirbyY = 390;
-
-let backgroundImage;
+let backgroundImage; // Array to store background images, contains references
 
 const particleSize = 70;
 let isGameActive = true;
 
+// Loading our images
 function preload() {
   startScreenImg = loadImage("welcomescreen.png");
   loseScreenImg = loadImage("losescreen.png");
@@ -35,13 +33,14 @@ function preload() {
   ];
 }
 
+// Creation of the falling geometrics
 function createSquare() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
   const v = level + Math.random() * 5.3; // Adjust the velocity range, wiho
   const shape = "square";
   const color = shape === "square" ? "green" : "red";
-  return { x: x, y: y, velocity: v, shape: shape, color: color };
+  return { x: x, y: y, velocity: v, shape: shape, color: color }; // Creation of particle objects
 }
 
 function createCircle() {
@@ -53,6 +52,7 @@ function createCircle() {
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
 
+// Drawing and updating the geometrics
 function drawParticle(particle) {
   push();
   translate(particle.x, particle.y);
@@ -87,11 +87,12 @@ function updateParticle(particle) {
       state = "over";
       resetGame();
     }
-    particle.x = Math.random() * width;
+    particle.x = Math.random() * width; // Making them appear on different x positions over again
     particle.y = -70; // Reset the particle's position
   }
 }
 
+// Resetting the game
 function resetGame() {
   greenSquaresCollected = 0;
   particles = [];
@@ -108,6 +109,8 @@ function setup() {
   resetGame();
 }
 
+// Citation: We used chatGPT to help us detect why our first collusion function did not work, and got help to get the values right
+// Checking if there are any collusion between kirby and the particles (geometrics)
 function checkCollision(particle) {
   const kirbyLeft = kirbyX + 110 * s;
   const kirbyRight = kirbyX + 310 * s;
@@ -125,12 +128,13 @@ function checkCollision(particle) {
     particleBottom < kirbyTop ||
     particleTop > kirbyBottom
   ) {
-    return false;
+    return false; // No collision detected
   } else {
-    return true;
+    return true; // Collusion detected! Wiho
   }
 }
 
+// Our game screen!!! Wihooo
 function gameScreen() {
   background(backgroundImage[level]);
   push();
@@ -152,7 +156,7 @@ function gameScreen() {
   text("Score: " + score, 15, 35);
   textSize(28);
 
-  // Updating and drawing the particles
+  // Here we are through each particle in the particles array and updating/drawing them
   for (let i = 0; i < particles.length; i++) {
     const particle = particles[i];
     updateParticle(particle);
@@ -170,12 +174,15 @@ function gameScreen() {
     kirbyX += 5;
   }
 
+  // Checking if the goal is reached to level up
   if (greenSquaresCollected === goal) {
     greenSquaresCollected = 0;
     particles = [];
     score = 0;
     level += 1;
 
+    // Got help from teaching assistant to calculate the math in how we could go from gameScreen functions, into one with the help of new level variable, goal variable and math!
+    // Pushing new particles into the array based on the level
     for (let i = 0; i < -1 * level + 4; i++) {
       const particle = createSquare();
       particles.push(particle);
@@ -214,7 +221,7 @@ function button(x, y, s) {
   pop();
 }
 
-// Talking bubble for the over and finished game //
+// Talking bubble for the game over and finished game //
 function buttonAgain(x, y, s) {
   push();
   fill(250, 200, 210);
@@ -265,6 +272,7 @@ function startScreen() {
   button(x + 135, y + 25, s * 1.6);
 }
 
+// Creating a mouse clicked event to make the two button work
 function mouseClicked() {
   if (state === "start") {
     if (
