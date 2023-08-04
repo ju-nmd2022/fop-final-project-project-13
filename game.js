@@ -12,6 +12,7 @@ let greenSquaresCollected = 0;
 let kirby;
 let level = 0;
 let goal = 0;
+let boosters = [];
 let geometrics = []; // Array to store falling geometrics
 let score = 0;
 let kirbyX = 400;
@@ -39,7 +40,7 @@ function preload() {
 function createSquare() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 5.3; // Adjust the velocity range, wiho
+  const v = level + Math.random() * 1.8; // Adjust the velocity range
   const shape = "square";
   const color = shape === "square" ? "green" : "red";
   return { x: x, y: y, velocity: v, shape: shape, color: color }; // Creation of particle objects
@@ -48,9 +49,18 @@ function createSquare() {
 function createCircle() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 5.3; // Adjust the velocity range, wiho
+  const v = level + Math.random() * 1.8; // Adjust the velocity range
   const shape = "circle";
   const color = shape === "square" ? "green" : "red";
+  return { x: x, y: y, velocity: v, shape: shape, color: color };
+}
+
+function createSpeedBooster() {
+  const x = Math.random() * width;
+  const y = -70; // Setting the initial y position to a negative value
+  const v = level + Math.random() * 3; // Adjust the velocity range
+  const shape = "flash"; // Use a triangle for the booster
+  const color = "yellow"; // Let's use blue color for the booster
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
 
@@ -67,6 +77,10 @@ function drawGeometric(geometric) {
   } else if (geometric.shape === "circle") {
     fill(240, 100, 120);
     ellipse(0, 0, 70, 70);
+  } else if (geometric.shape === "flash") {
+    fill(255, 255, 0);
+    triangle(-55, 35, 30, -35, 25, 35); // Draw a triangle at the center
+    triangle(-20, 75, -15, 35, 45, 35);
   }
   pop();
 }
@@ -94,6 +108,31 @@ function updateGeometric(geometric) {
   }
 }
 
+function updateSpeedBooster(speedBooster) {
+  speedBooster.y = speedBooster.y + speedBooster.velocity;
+
+  // Wrapping up the booster when it reaches the bottom of the canvas
+  if (speedBooster.y > height + 70) {
+    speedBooster.x = Math.random() * width;
+    speedBooster.y = -70;
+  }
+
+  if (checkCollision(speedBooster)) {
+    // Booster collided with Kirby
+    // Implement the effects of the booster, e.g., green and red circles falling faster
+    // You can adjust the velocity of the existing geometrics here
+    for (let i = 0; i < geometrics.length; i++) {
+      if (geometrics[i].shape === "circle") {
+        geometrics[i].velocity += 4; // Increase the velocity of red and green circles
+      }
+    }
+
+    // Remove the booster from the screen
+    speedBooster.x = Math.random() * width;
+    speedBooster.y = -70;
+  }
+}
+
 // Resetting the game
 function resetGame() {
   greenSquaresCollected = 0;
@@ -107,6 +146,10 @@ function setup() {
   createCanvas(700, 600);
   background(253, 212, 238);
   kirby = new Kirby(kirbyX, kirbyY);
+  for (let i = 0; i < level + 1; i++) {
+    const booster = createSpeedBooster();
+    boosters.push(booster);
+  }
 
   resetGame();
 }
@@ -164,6 +207,12 @@ function gameScreen() {
     const geometric = geometrics[i];
     updateGeometric(geometric);
     drawGeometric(geometric);
+  }
+
+  for (let i = 0; i < boosters.length; i++) {
+    const booster = boosters[i];
+    updateSpeedBooster(booster);
+    drawGeometric(booster);
   }
 
   // Drawing Kirby
@@ -314,6 +363,7 @@ function draw() {
     resetGame();
   }
 }
+// Citation: We used chatGPT to debug our code several times during our coding process when the code was not exctecuted in the way we wanted/went black
 
 window.preload = preload;
 window.setup = setup;
