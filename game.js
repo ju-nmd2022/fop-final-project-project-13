@@ -319,3 +319,33 @@ window.preload = preload;
 window.setup = setup;
 window.mouseClicked = mouseClicked;
 window.draw = draw;
+
+/*
+//adding a booster function
+//this booster will reverse the geometrics colors
+//red circles become green and green squares become red
+function boosterColor() {
+
+}
+
+//chat gpt reference 
+function updateGame() {
+            createObject();
+
+            for (const obj of objects) {
+                updateGeometric();
+            }
+
+            if (boostActive) {
+                boostDuration--;
+
+                if (boostDuration <= 0) {
+                    boostActive = false;
+                    for (const obj of objects) {
+                        obj.color = (obj.color === red) ? green : red;
+                    }
+                }
+            }
+        }
+
+        */
