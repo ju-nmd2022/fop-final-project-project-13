@@ -64,6 +64,18 @@ function createSpeedBooster() {
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
 
+//adding a booster function
+//this booster will reverse the geometrics colors
+//red circles become green and green squares become red
+function createColorBooster() {
+  const x = Math.random() * width;
+  const y = -70; // Setting the initial y position to a negative value
+  const v = level + Math.random() * 3; // Adjust the velocity range
+  const shape = "triangle";
+  const color = "blue";
+  return { x: x, y: y, velocity: v, shape: shape, color: color };
+}
+
 // Drawing and updating the geometrics
 function drawGeometric(geometric) {
   push();
@@ -130,6 +142,33 @@ function updateSpeedBooster(speedBooster) {
     // Remove the booster from the screen
     speedBooster.x = Math.random() * width;
     speedBooster.y = -70;
+  }
+}
+
+function updateColorBooster(colorBooster) {
+  colorBooster.y = colorBooster.y + colorBooster.velocity;
+
+  // Wrapping up the booster when it reaches the bottom of the canvas
+  if (colorBooster.y > height + 70) {
+    colorBooster.x = Math.random() * width;
+    colorBooster.y = -70;
+  }
+
+  if (checkCollision(colorBooster)) {
+    // Booster collided with Kirby
+    // Change the colors of green squares and red circles
+    for (let i = 0; i < geometrics.length; i++) {
+      const geometric = geometrics[i];
+      if (geometric.shape === "square" && geometric.color === "green") {
+        geometric.color = "red";
+      } else if (geometric.shape === "circle" && geometric.color === "red") {
+        geometric.color = "green";
+      }
+    }
+
+    // Remove the booster from the screen
+    colorBooster.x = Math.random() * width;
+    colorBooster.y = -70;
   }
 }
 
@@ -212,6 +251,7 @@ function gameScreen() {
   for (let i = 0; i < boosters.length; i++) {
     const booster = boosters[i];
     updateSpeedBooster(booster);
+    updateColorBooster(booster);
     drawGeometric(booster);
   }
 
@@ -369,33 +409,3 @@ window.preload = preload;
 window.setup = setup;
 window.mouseClicked = mouseClicked;
 window.draw = draw;
-
-/*
-//adding a booster function
-//this booster will reverse the geometrics colors
-//red circles become green and green squares become red
-function boosterColor() {
-
-}
-
-//chat gpt reference 
-function updateGame() {
-            createObject();
-
-            for (const obj of objects) {
-                updateGeometric();
-            }
-
-            if (boostActive) {
-                boostDuration--;
-
-                if (boostDuration <= 0) {
-                    boostActive = false;
-                    for (const obj of objects) {
-                        obj.color = (obj.color === red) ? green : red;
-                    }
-                }
-            }
-        }
-
-        */
