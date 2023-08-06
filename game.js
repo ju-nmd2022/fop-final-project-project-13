@@ -71,7 +71,7 @@ function createColorBooster() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
   const v = level + Math.random() * 3; // Adjust the velocity range
-  const shape = "square";
+  const shape = "cloud";
   const color = "blue";
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
@@ -93,6 +93,13 @@ function drawGeometric(geometric) {
     fill(255, 255, 0);
     triangle(-55, 35, 30, -35, 25, 35); // Draw a triangle at the center
     triangle(-20, 75, -15, 35, 45, 35);
+  } else if (geometric.shape === "cloud") {
+    fill(135, 206, 235);
+    ellipse(100, 100, 70, 70);
+    ellipse(190, 100, 70, 70);
+    ellipse(140, 100, 70, 70);
+    ellipse(120, 70, 70, 70);
+    ellipse(160, 70, 70, 70);
   }
   pop();
 }
