@@ -71,7 +71,7 @@ function createColorBooster() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
   const v = level + Math.random() * 3; // Adjust the velocity range
-  const shape = "triangle";
+  const shape = "square";
   const color = "blue";
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
@@ -186,10 +186,9 @@ function setup() {
   background(253, 212, 238);
   kirby = new Kirby(kirbyX, kirbyY);
   for (let i = 0; i < level + 1; i++) {
-    const booster = createSpeedBooster();
+    const booster = i === 1 ? createColorBooster() : createSpeedBooster();
     boosters.push(booster);
   }
-
   resetGame();
 }
 
