@@ -14,6 +14,8 @@ let level = 0;
 let goal = 0;
 let boosters = [];
 let colorBoosters = [];
+let movementBoosters = [];
+let kirbySpeed = 5; // Adjust this value to control Kirby's initial movement speed
 let geometrics = []; // Array to store falling geometrics
 let score = 0;
 let kirbyX = 400;
@@ -77,6 +79,15 @@ function createColorBooster() {
   return { x: x, y: y, velocity: v, shape: shape, color: color };
 }
 
+function createMovementBooster() {
+  const x = Math.random() * width;
+  const y = -70; // Setting the initial y position to a negative value
+  const v = level + Math.random() * 2.5; // Adjust the velocity range
+  const shape = "arrow";
+  const color = "black";
+  return { x: x, y: y, velocity: v, shape: shape, color: color };
+}
+
 // Drawing and updating the geometrics
 function drawGeometric(geometric) {
   push();
@@ -101,6 +112,10 @@ function drawGeometric(geometric) {
     ellipse(30, 0, 70, 70);
     ellipse(-15, -30, 70, 70);
     ellipse(15, -30, 70, 70);
+  } else if (geometric.shape === "arrow") {
+    fill(0, 0, 0);
+    triangle(50, 0, 0, 25, 50, 50);
+    rect(50, 15, 50, 20);
   }
   pop();
 }
@@ -180,6 +195,25 @@ function updateColorBooster(colorBooster) {
   }
 }
 
+function updateMovementBooster(movementBooster) {
+  movementBooster.y = movementBooster.y + movementBooster.velocity;
+
+  // Wrapping up the booster when it reaches the bottom of the canvas
+  if (movementBooster.y > height + 70) {
+    movementBooster.x = Math.random() * width;
+    movementBooster.y = -70;
+  }
+
+  if (checkCollision(movementBooster)) {
+    // Remove the booster from the screen
+    movementBooster.x = Math.random() * width;
+    movementBooster.y = -70;
+
+    // Reduce Kirby's movement speed by a multiplier
+    kirbySpeed = 2; // Adjust this multiplier to control the amount of reduction
+  }
+}
+
 // Resetting the game
 function resetGame() {
   greenSquaresCollected = 0;
@@ -187,6 +221,7 @@ function resetGame() {
   isGameActive = true;
   score = 0;
   level = 0;
+  kirbySpeed = 5;
 }
 
 function setup() {
@@ -204,6 +239,12 @@ function setup() {
   for (let i = 0; i < level + 1; i++) {
     const booster = createColorBooster();
     colorBoosters.push(booster);
+  }
+
+  // Create movement boosters
+  for (let i = 0; i < level + 1; i++) {
+    const booster = createMovementBooster();
+    movementBoosters.push(booster);
   }
 }
 
@@ -256,6 +297,7 @@ function gameScreen() {
 
   // Citation/Inspiration = "Foundations of Programming - The particle example (snow) from the lecture at 03.02, by Garrit. //
   // Here we are through each particle in the particles array and updating/drawing them
+  // Update and draw geometrics and boosters
   for (let i = 0; i < geometrics.length; i++) {
     const geometric = geometrics[i];
     updateGeometric(geometric);
@@ -268,33 +310,38 @@ function gameScreen() {
     drawGeometric(booster);
   }
 
-  // Update and draw color boosters
   for (let i = 0; i < colorBoosters.length; i++) {
     const colorBooster = colorBoosters[i];
     updateColorBooster(colorBooster);
     drawGeometric(colorBooster);
   }
 
-  // Drawing Kirby
+  // Arrow key movement for Kirby
+  if (keyIsDown(37)) {
+    kirbyX -= kirbySpeed;
+  } else if (keyIsDown(39)) {
+    kirbyX += kirbySpeed;
+  }
+
+  // Update and draw movement boosters
+  for (let i = 0; i < movementBoosters.length; i++) {
+    const movementBooster = movementBoosters[i];
+    updateMovementBooster(movementBooster);
+    drawGeometric(movementBooster);
+  }
+
+  // Draw Kirby
   kirby.draw(kirbyX, kirbyY, s);
 
-  // Moving Kirby
-  if (keyIsDown(37)) {
-    kirbyX -= 5;
-  }
-  if (keyIsDown(39)) {
-    kirbyX += 5;
-  }
-
-  // Checking if the goal is reached to level up
+  // Check if the goal is reached to level up
   if (greenSquaresCollected === goal) {
     greenSquaresCollected = 0;
     geometrics = [];
     score = 0;
     level += 1;
+    kirbySpeed = 5;
 
-    // Got help from teaching assistant to calculate the math in how we could go from gameScreen functions, into one with the help of new level variable, goal variable and math!
-    // Pushing new particles into the array based on the level
+    // Push new particles into the array based on the level
     for (let i = 0; i < -1 * level + 4; i++) {
       const geometric = createSquare();
       geometrics.push(geometric);
@@ -304,7 +351,7 @@ function gameScreen() {
       geometrics.push(geometric);
     }
     greenSquaresCollected = 0;
-    if (level == 4) {
+    if (level === 4) {
       state = "finished";
     }
   }
