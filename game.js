@@ -13,6 +13,7 @@ let kirby;
 let level = 0;
 let goal = 0;
 let boosters = [];
+let colorBoosters = [];
 let geometrics = []; // Array to store falling geometrics
 let score = 0;
 let kirbyX = 400;
@@ -58,7 +59,7 @@ function createCircle() {
 function createSpeedBooster() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 3; // Adjust the velocity range
+  const v = level + Math.random() * 1.8; // Adjust the velocity range
   const shape = "flash"; // Use a triangle for the booster
   const color = "yellow"; // Let's use blue color for the booster
   return { x: x, y: y, velocity: v, shape: shape, color: color };
@@ -70,7 +71,7 @@ function createSpeedBooster() {
 function createColorBooster() {
   const x = Math.random() * width;
   const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 3; // Adjust the velocity range
+  const v = level + Math.random() * 2.5; // Adjust the velocity range
   const shape = "cloud";
   const color = "blue";
   return { x: x, y: y, velocity: v, shape: shape, color: color };
@@ -95,11 +96,11 @@ function drawGeometric(geometric) {
     triangle(-20, 75, -15, 35, 45, 35);
   } else if (geometric.shape === "cloud") {
     fill(135, 206, 235);
-    ellipse(100, 100, 70, 70);
-    ellipse(190, 100, 70, 70);
-    ellipse(140, 100, 70, 70);
-    ellipse(120, 70, 70, 70);
-    ellipse(160, 70, 70, 70);
+    ellipse(0, 0, 70, 70); // Use (0, 0) as the position
+    ellipse(-30, 0, 70, 70);
+    ellipse(30, 0, 70, 70);
+    ellipse(-15, -30, 70, 70);
+    ellipse(15, -30, 70, 70);
   }
   pop();
 }
@@ -192,11 +193,18 @@ function setup() {
   createCanvas(700, 600);
   background(253, 212, 238);
   kirby = new Kirby(kirbyX, kirbyY);
+
+  // Create speed boosters
   for (let i = 0; i < level + 1; i++) {
-    const booster = i === 1 ? createColorBooster() : createSpeedBooster();
+    const booster = createSpeedBooster();
     boosters.push(booster);
   }
-  resetGame();
+
+  // Create color boosters
+  for (let i = 0; i < level + 1; i++) {
+    const booster = createColorBooster();
+    colorBoosters.push(booster);
+  }
 }
 
 // Citation: We used chatGPT to help us detect why our first collusion function did not work, and got help to get the values right
@@ -257,8 +265,14 @@ function gameScreen() {
   for (let i = 0; i < boosters.length; i++) {
     const booster = boosters[i];
     updateSpeedBooster(booster);
-    updateColorBooster(booster);
     drawGeometric(booster);
+  }
+
+  // Update and draw color boosters
+  for (let i = 0; i < colorBoosters.length; i++) {
+    const colorBooster = colorBoosters[i];
+    updateColorBooster(colorBooster);
+    drawGeometric(colorBooster);
   }
 
   // Drawing Kirby
