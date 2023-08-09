@@ -166,7 +166,7 @@ function updateColorBooster(colorBooster) {
 
 function updateMovementBooster(movementBooster) {
   updateBooster(movementBooster, function () {
-    kirbySpeed = 2; // Adjust this multiplier to control the amount of reduction
+    kirbySpeed = 2; // Slowing Kirby down
   });
 }
 
