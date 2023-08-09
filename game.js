@@ -170,6 +170,7 @@ function updateMovementBooster(movementBooster) {
   });
 }
 
+// Function to reset booster positions
 function resetBoosterPosition(boosters) {
   for (let i = 0; i < boosters.length; i++) {
     boosters[i].x = Math.random() * width;
@@ -179,6 +180,7 @@ function resetBoosterPosition(boosters) {
 
 // Resetting the game
 function resetGame() {
+  // Resetting the game variebles
   greenSquaresCollected = 0;
   geometrics = [];
   isGameActive = true;
@@ -186,6 +188,7 @@ function resetGame() {
   level = 0;
   kirbySpeed = 5;
 
+  //Calling for the function which resets the boosters position
   resetBoosterPosition(boosters);
   resetBoosterPosition(colorBoosters);
   resetBoosterPosition(movementBoosters);
@@ -277,18 +280,18 @@ function gameScreen() {
     drawGeometric(colorBooster);
   }
 
-  // Arrow key movement for Kirby
-  if (keyIsDown(37)) {
-    kirbyX -= kirbySpeed;
-  } else if (keyIsDown(39)) {
-    kirbyX += kirbySpeed;
-  }
-
   // Update and draw movement boosters
   for (let i = 0; i < movementBoosters.length; i++) {
     const movementBooster = movementBoosters[i];
     updateMovementBooster(movementBooster);
     drawGeometric(movementBooster);
+  }
+
+  // Arrow key movement for Kirby
+  if (keyIsDown(37)) {
+    kirbyX -= kirbySpeed;
+  } else if (keyIsDown(39)) {
+    kirbyX += kirbySpeed;
   }
 
   // Draw Kirby
@@ -303,6 +306,7 @@ function gameScreen() {
     kirbySpeed = 5;
 
     // Push new particles into the array based on the level
+    // Level up logic
     for (let i = 0; i < -1 * level + 4; i++) {
       const geometric = createSquare();
       geometrics.push(geometric);
