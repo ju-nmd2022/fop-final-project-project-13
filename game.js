@@ -103,11 +103,11 @@ function drawGeometric(geometric) {
     ellipse(0, 0, 70, 70);
   } else if (geometric.shape === "flash") {
     fill(255, 255, 0);
-    triangle(-55, 35, 30, -35, 25, 35); // Draw a triangle at the center
+    triangle(-55, 35, 30, -35, 25, 35);
     triangle(-20, 75, -15, 35, 45, 35);
   } else if (geometric.shape === "cloud") {
     fill(135, 206, 235);
-    ellipse(0, 0, 70, 70); // Use (0, 0) as the position
+    ellipse(0, 0, 70, 70);
     ellipse(-30, 0, 70, 70);
     ellipse(30, 0, 70, 70);
     ellipse(-15, -30, 70, 70);
