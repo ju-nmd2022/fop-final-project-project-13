@@ -145,7 +145,7 @@ function updateSpeedBooster(speedBooster) {
   updateBooster(speedBooster, function () {
     for (let i = 0; i < geometrics.length; i++) {
       if (geometrics[i].shape === "circle") {
-        geometrics[i].velocity += 4; // Increase the velocity of red and green circles
+        geometrics[i].velocity += 4; // Making the red circles fall faster by changing velocity
       }
     }
   });
@@ -199,7 +199,7 @@ function setup() {
   background(253, 212, 238);
   kirby = new Kirby(kirbyX, kirbyY);
 
-  // Clear the booster arrays so that the boosters reset to the top when entering new level
+  // Here we are clearing the booster arrays
   boosters = [];
   colorBoosters = [];
   movementBoosters = [];
