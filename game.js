@@ -38,54 +38,31 @@ function preload() {
   ];
 }
 
-// Citation/Inspiration = "Foundations of Programming - The particle example (snow) from the lecture at 03.02, by Garrit. //
-// Creation of the falling geometrics
-function createSquare() {
+function createGeometric(shape, color) {
   const x = Math.random() * width;
-  const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 1.8; // Adjust the velocity range
-  const shape = "square";
-  const color = shape === "square" ? "green" : "red";
-  return { x: x, y: y, velocity: v, shape: shape, color: color }; // Creation of particle objects
+  const y = -70;
+  const v = level + Math.random() * 1.8;
+  return { x, y, velocity: v, shape, color };
+}
+
+function createSquare() {
+  return createGeometric("square", "green");
 }
 
 function createCircle() {
-  const x = Math.random() * width;
-  const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 1.8; // Adjust the velocity range
-  const shape = "circle";
-  const color = shape === "square" ? "green" : "red";
-  return { x: x, y: y, velocity: v, shape: shape, color: color };
+  return createGeometric("circle", "red");
 }
 
 function createSpeedBooster() {
-  const x = Math.random() * width;
-  const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 1.8; // Adjust the velocity range
-  const shape = "flash"; // Use a triangle for the booster
-  const color = "yellow"; // Let's use blue color for the booster
-  return { x: x, y: y, velocity: v, shape: shape, color: color };
+  return createGeometric("flash", "yellow");
 }
 
-//adding a booster function
-//this booster will reverse the geometrics colors
-//red circles become green and green squares become red
 function createColorBooster() {
-  const x = Math.random() * width;
-  const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 2.5; // Adjust the velocity range
-  const shape = "cloud";
-  const color = "blue";
-  return { x: x, y: y, velocity: v, shape: shape, color: color };
+  return createGeometric("cloud", "blue");
 }
 
 function createMovementBooster() {
-  const x = Math.random() * width;
-  const y = -70; // Setting the initial y position to a negative value
-  const v = level + Math.random() * 2.5; // Adjust the velocity range
-  const shape = "arrow";
-  const color = "black";
-  return { x: x, y: y, velocity: v, shape: shape, color: color };
+  return createGeometric("arrow", "black");
 }
 
 // Drawing and updating the geometrics
@@ -143,43 +120,36 @@ function updateGeometric(geometric) {
   }
 }
 
-function updateSpeedBooster(speedBooster) {
-  speedBooster.y = speedBooster.y + speedBooster.velocity;
+function updateBooster(booster, effectFunction) {
+  booster.y = booster.y + booster.velocity;
 
   // Wrapping up the booster when it reaches the bottom of the canvas
-  if (speedBooster.y > height + 70) {
-    speedBooster.x = Math.random() * width;
-    speedBooster.y = -70;
+  if (booster.y > height + 70) {
+    booster.x = Math.random() * width;
+    booster.y = -70;
   }
 
-  if (checkCollision(speedBooster)) {
-    // Booster collided with Kirby
-    // Implement the effects of the booster, e.g., green and red circles falling faster
-    // You can adjust the velocity of the existing geometrics here
+  if (checkCollision(booster)) {
+    effectFunction();
+
+    // Remove the booster from the screen
+    booster.x = Math.random() * width;
+    booster.y = -70;
+  }
+}
+
+function updateSpeedBooster(speedBooster) {
+  updateBooster(speedBooster, function () {
     for (let i = 0; i < geometrics.length; i++) {
       if (geometrics[i].shape === "circle") {
         geometrics[i].velocity += 4; // Increase the velocity of red and green circles
       }
     }
-
-    // Remove the booster from the screen
-    speedBooster.x = Math.random() * width;
-    speedBooster.y = -70;
-  }
+  });
 }
 
 function updateColorBooster(colorBooster) {
-  colorBooster.y = colorBooster.y + colorBooster.velocity;
-
-  // Wrapping up the booster when it reaches the bottom of the canvas
-  if (colorBooster.y > height + 70) {
-    colorBooster.x = Math.random() * width;
-    colorBooster.y = -70;
-  }
-
-  if (checkCollision(colorBooster)) {
-    // Booster collided with Kirby
-    // Change the colors of green squares and red circles
+  updateBooster(colorBooster, function () {
     for (let i = 0; i < geometrics.length; i++) {
       const geometric = geometrics[i];
       if (geometric.shape === "square" && geometric.color === "green") {
@@ -188,30 +158,13 @@ function updateColorBooster(colorBooster) {
         geometric.color = "green";
       }
     }
-
-    // Remove the booster from the screen
-    colorBooster.x = Math.random() * width;
-    colorBooster.y = -70;
-  }
+  });
 }
 
 function updateMovementBooster(movementBooster) {
-  movementBooster.y = movementBooster.y + movementBooster.velocity;
-
-  // Wrapping up the booster when it reaches the bottom of the canvas
-  if (movementBooster.y > height + 70) {
-    movementBooster.x = Math.random() * width;
-    movementBooster.y = -70;
-  }
-
-  if (checkCollision(movementBooster)) {
-    // Remove the booster from the screen
-    movementBooster.x = Math.random() * width;
-    movementBooster.y = -70;
-
-    // Reduce Kirby's movement speed by a multiplier
+  updateBooster(movementBooster, function () {
     kirbySpeed = 2; // Adjust this multiplier to control the amount of reduction
-  }
+  });
 }
 
 // Resetting the game
@@ -237,18 +190,21 @@ function setup() {
   // Create speed boosters
   for (let i = 0; i < level + 1; i++) {
     const booster = createSpeedBooster();
+    booster.y = -70; // Set the initial y position to -70
     boosters.push(booster);
   }
 
   // Create color boosters
   for (let i = 0; i < level + 1; i++) {
     const booster = createColorBooster();
+    booster.y = -70; // Set the initial y position to -70
     colorBoosters.push(booster);
   }
 
   // Create movement boosters
   for (let i = 0; i < level + 1; i++) {
     const booster = createMovementBooster();
+    booster.y = -70; // Set the initial y position to -70
     movementBoosters.push(booster);
   }
 }
