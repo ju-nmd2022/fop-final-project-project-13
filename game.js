@@ -180,13 +180,27 @@ function resetGame() {
   kirbySpeed = 5;
 
   for (let i = 0; i < boosters.length; i++) {
-    boosters[i].y = -70;
+    boosters[i].x = Math.random() * width; // Reset the x position
+    boosters[i].y = -70; // Reset the y position
   }
   for (let i = 0; i < colorBoosters.length; i++) {
-    colorBoosters[i].y = -70;
+    colorBoosters[i].x = Math.random() * width; // Reset the x position
+    colorBoosters[i].y = -70; // Reset the y position
   }
   for (let i = 0; i < movementBoosters.length; i++) {
-    movementBoosters[i].y = -70;
+    movementBoosters[i].x = Math.random() * width; // Reset the x position
+    movementBoosters[i].y = -70; // Reset the y position
+  }
+
+  // Create new boosters based on the current level
+  for (let i = 0; i < level + 1; i++) {
+    const speedBooster = createSpeedBooster();
+    const colorBooster = createColorBooster();
+    const movementBooster = createMovementBooster();
+
+    boosters.push(speedBooster);
+    colorBoosters.push(colorBooster);
+    movementBoosters.push(movementBooster);
   }
 }
 
@@ -200,15 +214,11 @@ function setup() {
   colorBoosters = [];
   movementBoosters = [];
 
-  // Create speed boosters
+  // Create boosters of different types
   for (let i = 0; i < level + 1; i++) {
-    const speedBooster = createSpeedBooster();
-    const colorBooster = createColorBooster();
-    const movementBooster = createMovementBooster();
-
-    boosters.push(speedBooster);
-    colorBoosters.push(colorBooster);
-    movementBoosters.push(movementBooster);
+    boosters.push(createSpeedBooster());
+    colorBoosters.push(createColorBooster());
+    movementBoosters.push(createMovementBooster());
   }
 }
 
