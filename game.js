@@ -121,6 +121,7 @@ function updateGeometric(geometric) {
 }
 
 function updateBooster(booster, effectFunction) {
+  console.log("Booster y:", booster.y);
   booster.y = booster.y + booster.velocity;
 
   // Wrapping up the booster when it reaches the bottom of the canvas
