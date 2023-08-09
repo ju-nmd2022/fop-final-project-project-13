@@ -229,6 +229,11 @@ function setup() {
   background(253, 212, 238);
   kirby = new Kirby(kirbyX, kirbyY);
 
+  // Clear the booster arrays so that the boosters reset to the top when entering new level
+  boosters = [];
+  colorBoosters = [];
+  movementBoosters = [];
+
   // Create speed boosters
   for (let i = 0; i < level + 1; i++) {
     const booster = createSpeedBooster();
