@@ -15,7 +15,7 @@ let goal = 0;
 let boosters = [];
 let colorBoosters = [];
 let movementBoosters = [];
-let kirbySpeed = 5; // Adjust this value to control Kirby's initial movement speed
+let kirbySpeed = 5;
 let geometrics = []; // Array to store falling geometrics
 let score = 0;
 let kirbyX = 400;
@@ -170,6 +170,13 @@ function updateMovementBooster(movementBooster) {
   });
 }
 
+function resetBoosterPosition(boosters) {
+  for (let i = 0; i < boosters.length; i++) {
+    boosters[i].x = Math.random() * width;
+    boosters[i].y = -70;
+  }
+}
+
 // Resetting the game
 function resetGame() {
   greenSquaresCollected = 0;
@@ -179,29 +186,9 @@ function resetGame() {
   level = 0;
   kirbySpeed = 5;
 
-  for (let i = 0; i < boosters.length; i++) {
-    boosters[i].x = Math.random() * width; // Reset the x position
-    boosters[i].y = -70; // Reset the y position
-  }
-  for (let i = 0; i < colorBoosters.length; i++) {
-    colorBoosters[i].x = Math.random() * width; // Reset the x position
-    colorBoosters[i].y = -70; // Reset the y position
-  }
-  for (let i = 0; i < movementBoosters.length; i++) {
-    movementBoosters[i].x = Math.random() * width; // Reset the x position
-    movementBoosters[i].y = -70; // Reset the y position
-  }
-
-  // Create new boosters based on the current level
-  for (let i = 0; i < level + 1; i++) {
-    const speedBooster = createSpeedBooster();
-    const colorBooster = createColorBooster();
-    const movementBooster = createMovementBooster();
-
-    boosters.push(speedBooster);
-    colorBoosters.push(colorBooster);
-    movementBoosters.push(movementBooster);
-  }
+  resetBoosterPosition(boosters);
+  resetBoosterPosition(colorBoosters);
+  resetBoosterPosition(movementBoosters);
 }
 
 function setup() {
