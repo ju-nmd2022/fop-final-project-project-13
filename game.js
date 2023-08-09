@@ -38,6 +38,7 @@ function preload() {
   ];
 }
 
+//creating our geometrics and boosters
 function createGeometric(shape, color) {
   const x = Math.random() * width;
   const y = -70;
@@ -106,6 +107,7 @@ function updateGeometric(geometric) {
     geometric.y = -70;
   }
 
+  //checking for collision
   if (checkCollision(geometric)) {
     // Geometrics collided with Kirby
     if (geometric.color === "green") {
@@ -120,6 +122,7 @@ function updateGeometric(geometric) {
   }
 }
 
+//updating all 3 of our boosters
 function updateBooster(booster, effectFunction) {
   booster.y = booster.y + booster.velocity;
 
